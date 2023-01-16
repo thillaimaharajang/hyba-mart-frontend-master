@@ -1,0 +1,25 @@
+@font-face {
+    font-family: "Poppins";
+    src: url('../assets/fonts/poppins/Poppins-Regular.ttf');
+}
+
+@font-face {
+    font-family: "Roboto";
+    src: url('../assets/fonts/roboto/Roboto-Regular.ttf');
+}
+
+@font-face {
+    font-family: "Outfit";
+    src: url('../assets/fonts/outfit/Outfit-VariableFont_wght.ttf');
+}
+
+@import url(Common.css);
+@import url(Antd.css);
+@import url(Login.css);
+@import url(Registration.css);
+@import url(Layout.css);
+@import url(IconColors.css);
+@import url(RichTextEditor.css);
+@import url(Component.css);
+@import url(Store.css);
+@import url(Charges.css);

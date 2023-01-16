@@ -1,0 +1,69 @@
+{
+  "name": "hyba-mart",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "@types/draft-js": "^0.11.9",
+    "@types/draftjs-to-html": "^0.8.1",
+    "@types/html-to-draftjs": "^1.4.0",
+    "@types/jest": "^27.5.2",
+    "@types/node": "^16.11.62",
+    "@types/react": "^18.0.21",
+    "@types/react-dom": "^18.0.6",
+    "@types/react-draft-wysiwyg": "^1.13.4",
+    "antd": "^4.23.3",
+    "antd-img-crop": "^4.2.8",
+    "bootstrap": "^5.2.1",
+    "draft-js": "^0.11.7",
+    "draftjs-to-html": "^0.9.1",
+    "env-cmd": "^10.1.0",
+    "framer-motion": "^7.5.1",
+    "gapi-script": "^1.2.0",
+    "html-to-draftjs": "^1.5.0",
+    "jwt-decode": "^3.1.2",
+    "mobx": "^6.6.2",
+    "mobx-react-lite": "^3.4.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-draft-wysiwyg": "^1.15.0",
+    "react-google-login": "^5.2.2",
+    "react-phone-input-2": "^2.15.1",
+    "react-router-dom": "^6.4.1",
+    "react-scripts": "5.0.1",
+    "typescript": "^4.8.4",
+    "web-vitals": "^2.1.4"
+  },
+  "scripts": {
+    "start": "env-cmd -f ./.env.dev react-scripts start",
+    "start:prod": "env-cmd -f ./.env.prod react-scripts start",
+    "build": "env-cmd -f ./.env.dev react-scripts build",
+    "build:prod": "env-cmd -f ./.env.prod react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "engines": {
+    "node": "16.17.0",
+    "npm": "8.15.0"
+  }
+}

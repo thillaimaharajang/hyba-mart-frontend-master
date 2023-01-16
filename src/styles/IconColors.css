@@ -1,0 +1,25 @@
+.sidebar-icon {
+    filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(7476%) hue-rotate(138deg) brightness(112%) contrast(98%);
+}
+
+.sidebar-icon-active {
+    filter: brightness(0) saturate(100%) invert(27%) sepia(98%) saturate(5122%) hue-rotate(233deg) brightness(101%) contrast(100%);
+}
+
+.nested-sidebar-icon {
+    filter: invert(37%) sepia(11%) saturate(179%) hue-rotate(315deg) brightness(93%) contrast(87%);
+    /* filter: brightness(0) saturate(100%) invert(45%) sepia(1%) saturate(2904%) hue-rotate(330deg) brightness(80%) contrast(97%); */
+}
+
+.nested-sidebar-icon-active {
+    filter: brightness(0) saturate(100%) invert(21%) sepia(70%) saturate(6604%) hue-rotate(236deg) brightness(112%) contrast(99%);
+    /* filter: brightness(60%) saturate(73%) invert(7%) sepia(41%) saturate(6383%) hue-rotate(219deg) brightness(112%) contrast(99%); */
+}
+
+.custom-tab-icon {
+    filter: brightness(0) saturate(100%) invert(45%) sepia(1%) saturate(2904%) hue-rotate(330deg) brightness(80%) contrast(97%);
+}
+
+.custom-tab-icon-active {
+    filter: brightness(0) saturate(100%) invert(100%) sepia(100%) saturate(15%) hue-rotate(210deg) brightness(105%) contrast(100%);
+}

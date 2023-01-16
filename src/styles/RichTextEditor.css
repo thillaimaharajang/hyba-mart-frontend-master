@@ -1,0 +1,64 @@
+.rdw-editor-wrapper {
+    background: #ECEFF1 !important;
+}
+
+.rdw-editor-toolbar {
+    margin-bottom: 0px !important;
+    background: rgba(255, 255, 255, 0.5) !important;
+    align-items: center !important;
+    padding-left: 1px !important;
+    padding-right: 1px !important;
+    padding-top: 2px !important;
+    padding-bottom: 2px !important;
+}
+
+.rdw-editor-main {
+    min-height: 5rem !important;
+    padding: 5px !important;
+}
+
+.rdw-editor {
+    background: #ECEFF1 !important;
+}
+
+.rdw-inline-wrapper {
+    margin-bottom: 0px !important;
+}
+
+.rdw-link-wrapper {
+    margin-bottom: 0px !important;
+}
+
+.rdw-emoji-wrapper {
+    margin-bottom: 0px !important;
+}
+
+.rdw-image-wrapper {
+    margin-bottom: 0px !important;
+}
+
+.rdw-dropdown-wrapper {
+    height: 26px !important;
+    background-color: #f6f7f8 !important;
+    padding-left: 2px !important;
+    padding-right: 2px !important;
+    padding-top: 1px !important;
+    padding-bottom: 1px !important;
+    margin-left: 3px !important;
+    margin-right: 3px !important;
+    margin-top: 1px !important;
+    margin-bottom: 1px !important;
+}
+
+.rdw-option-wrapper {
+    height: 26px !important;
+    background-color: #f6f7f8 !important;
+    padding-left: 2px !important;
+    padding-right: 2px !important;
+    padding-top: 1px !important;
+    padding-bottom: 1px !important;
+    margin-left: 3px !important;
+    margin-right: 3px !important;
+    margin-top: 1px !important;
+    margin-bottom: 1px !important;
+}

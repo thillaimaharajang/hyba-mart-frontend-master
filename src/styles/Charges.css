@@ -1,0 +1,11 @@
+.percentage-btn {
+    background-color: #635d5d4d;
+    color: #635d5d;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.percentage-btn-active {
+    background-color: #304FFE !important;
+    color: white !important;
+}
