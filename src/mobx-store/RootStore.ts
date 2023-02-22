@@ -15,6 +15,7 @@ import DeliveryStore from "./DeliveryStore";
 import NotificationStore from "./NotificationStore";
 import CheckoutStore from "./CheckoutStore";
 import BannerStore from "./BannerStore";
+import PaymentStore from "./PaymentStore";
 
 class RootStore {
     commonStore: CommonStore;
@@ -34,6 +35,7 @@ class RootStore {
     notificationStore: NotificationStore;
     checkoutStore: CheckoutStore;
     bannerStore: BannerStore;
+    paymentStore: PaymentStore;
 
     constructor() {
         this.commonStore = new CommonStore();
@@ -53,6 +55,8 @@ class RootStore {
         this.notificationStore = new NotificationStore();
         this.checkoutStore = new CheckoutStore();
         this.bannerStore = new BannerStore();
+        this.paymentStore = new PaymentStore();
+
     }
 }
 

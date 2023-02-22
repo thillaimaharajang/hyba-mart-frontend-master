@@ -37,6 +37,8 @@ const SecureService = (navigate: NavigateFunction) => {
     }
 
     const PostResponse = async (endpoint: string, method: string, body: any, isFormData: boolean = false) => {
+        console.log("Body",body)
+
         return await HttpClient(navigate).PostResponse(endpoint, method, body, isFormData);
     }
 

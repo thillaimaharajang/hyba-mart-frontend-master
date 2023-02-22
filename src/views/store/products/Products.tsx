@@ -12,7 +12,7 @@ import RootStore from "../../../mobx-store/RootStore";
 import { observer } from "mobx-react-lite";
 import { Loader } from "../../../components";
 import ProductCategoryHelper from "../../../helpers/ProductCategoryHelper";
-
+import twitter from '../../../assets/images/twitter-logo.png'
 const { confirm } = Modal;
 
 const Products: React.FC = () => {
@@ -30,7 +30,7 @@ const Products: React.FC = () => {
             width: '8%',
             render: (image: string) => (
                 <div>
-                    <img src={image} alt='product-image' style={{ height: '2.3rem' }} />
+                    <img src={twitter} alt='product-image' style={{ height: '2rem' }} />
                 </div>
             )
         },

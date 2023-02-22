@@ -112,6 +112,21 @@
     background-color: #304FFE !important;
 }
 
+.setting-btn {
+    background-color: #E94A3C !important;
+    height: 60px;
+min-width: 189px;
+
+border-radius: 10px;
+
+}
+
+.payment-grid .custom-table-row {
+    height: 74px;
+    width: 1268px;
+   
+     }
+
 /* Upload */
 .custom-upload>.ant-upload-list-picture-card>.ant-upload-select-picture-card {
     height: 50px !important;

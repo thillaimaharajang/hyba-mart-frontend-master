@@ -16,6 +16,7 @@ const Endpoints = {
     GetCategories: '/category',
     StoreDetails: '/store',
     ProductCategory: '/product-category',
+    PaymentMode: '/payment',
     Badge: '/badge',
     Charges: '/charge',
     Attributes: '/attribute',

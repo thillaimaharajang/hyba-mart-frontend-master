@@ -17,7 +17,7 @@ const ProductHelper = (navigate: NavigateFunction) => {
         }
 
         productStore.isLoading = true;
-        resProducts = await SecureService(navigate).GetResponse(Endpoints.Pages + params);
+        resProducts = await SecureService(navigate).GetResponse(Endpoints.Product + params);
         productStore.isLoading = false;
 
         if (resProducts?.status === 'OK') {
@@ -28,8 +28,14 @@ const ProductHelper = (navigate: NavigateFunction) => {
     }
 
     const CreateProduct = async () => {
+        console.log("Debugging Started");
+        
         let resCreateProduct: any;
         let productFormData: any = new FormData();
+        console.log(productFormData, '---------------------')
+        productStore.attributes = [{ id: '2', description: 'Thillai', status: true }]
+        console.log(productStore, 'productStore')
+        // productStore.attributes = [{ id: '2', description: 'Thillai', status: true }]
         productFormData.append('storeId', shopStore?.id);
         productFormData.append('name', productStore?.name);
         productFormData.append('productCategoryId', productStore?.productCategoryId);
@@ -44,9 +50,10 @@ const ProductHelper = (navigate: NavigateFunction) => {
         productFormData.append('quantity', productStore?.quantity);
         productFormData.append('badgeId', productStore?.badgeId);
         productFormData.append('badgeStatus', productStore?.badgeStatus);
-        productFormData.append('attributes', productStore?.attributes);
+        productFormData.append('attributes', JSON.stringify([{ id: '2', description: 'Thillai', status: true }]));
         productFormData.append('status', productStore?.status);
         productFormData.append('outOfStockStatus', productStore?.outOfStockStatus);
+        console.log("productFormData",JSON.stringify(productFormData))
 
         productStore.isLoading = true;
         resCreateProduct = await SecureService(navigate).PostResponse(Endpoints.Product, 'POST', productFormData, true);
@@ -67,7 +74,8 @@ const ProductHelper = (navigate: NavigateFunction) => {
         productFormData.append('regularPrice', productStore?.regularPrice);
         productFormData.append('offerPrice', productStore?.offerPrice);
         productFormData.append('sku', productStore?.sku);
-        productFormData.append('description', Function.convertEditorStateToHtml(productStore?.description));
+        // productFormData.append('description', Function.convertEditorStateToHtml(productStore?.description));
+        productFormData.append('description', productStore?.description);
         productFormData.append('mainImage', productStore?.mainImage);
         productFormData.append('galleryImages', productStore?.galleryImages);
         productFormData.append('measurement', productStore?.measurement);

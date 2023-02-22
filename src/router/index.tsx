@@ -10,6 +10,7 @@ import CustomSuspense from "../components/CustomSuspense";
 import Function from "../utils/Function";
 
 const Login = lazy(() => import("../views/authentication/Login"));
+const ProductStore = lazy(() => import("../views/productStore"));
 const Registration = lazy(() => import("../views/authentication/Registration"));
 const RegistrationOTPVerification = lazy(() => import("../views/authentication/RegistrationOTPVerification"));
 const ResetPassword = lazy(() => import("../views/authentication/ResetPassword"));
@@ -31,6 +32,7 @@ const Router = () => {
 
   return <Routes>
     <Route path='login' element={<CustomSuspense><Login /></CustomSuspense>} />
+    <Route path='product-store/:id' element={<CustomSuspense><ProductStore /></CustomSuspense>} />
     <Route path='registration' element={<CustomSuspense><Registration /></CustomSuspense>} />
     <Route path='registration-otp-verification' element={<CustomSuspense><RegistrationOTPVerification /></CustomSuspense>} />
     <Route path='account-activation' element={<CustomSuspense><AccountActivation /></CustomSuspense>} />

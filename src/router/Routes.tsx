@@ -34,14 +34,18 @@ const Note = lazy(() => import('../views/store/checkouts/Note'));
 const UserVerification = lazy(() => import('../views/store/checkouts/UserVerification'));
 const Banner = lazy(() => import('../views/store/Banner'));
 const Payment = lazy(() => import('../views/store/Payment'));
+const EditPayment = lazy(() => import('../views/store/PaymentSetting'));
+
 const Coupon = lazy(() => import('../views/store/Coupon'));
 const AddContact = lazy(() => import('../views/settings/contact/AddContact'));
 const UpdateContact = lazy(() => import('../views/settings/contact/UpdateContact'));
 const AddLink = lazy(() => import('../views/settings/links/AddLink'));
 const UpdateLink = lazy(() => import('../views/settings/links/UpdateLink'));
+// const ProductStore = lazy(() => import('../views/productStore'));
 
 const Routes: IRoutesProps[] = [
     { path: 'main-dashboard', name: 'Dashboard', element: MainDashboard, icon: 'Dashboard', children: [] },
+    // { path: 'product-store', name: 'Product Store', element: ProductStore, icon: 'Dashboard', children: [] },
     {
         path: 'store', name: 'Store', icon: 'Store', children: [
             { path: 'dashboard', name: 'Dashboard', element: Dashboard, icon: 'Dashboard' },
@@ -68,6 +72,8 @@ const Routes: IRoutesProps[] = [
             },
             { path: 'banner', name: 'Banner', element: Banner, icon: 'Banner' },
             { path: 'payment', name: 'Payment', element: Payment, icon: 'Payment' },
+            { path: 'payment/:id', name: 'Edit Payment', element: EditPayment, icon: 'Payment' },
+            { path: 'products/:id', name: 'Update Product', element: UpdateProducts, icon: 'Products' },
             { path: 'coupon', name: 'Coupon', element: Coupon, icon: 'Coupon' }
         ]
     },
