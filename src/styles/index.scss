@@ -1,0 +1,89 @@
+body,
+html {
+  font-size: 16px;
+  font-family: 'Poppins';
+}
+
+body {
+  margin: 0;
+  font-family: 'Poppins';
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.container-bg {
+    background-color: white;
+}
+.title-header {
+    position: relative;
+    min-height: 100px;
+    width: 25%;
+}
+.title-text {
+    position: absolute;
+    text-transform: uppercase;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+}
+.title-vector {
+    position: absolute;
+    top: 63%;
+    right: 7%;
+    z-index: 0;
+}
+.product-style {
+    display: inline-block;
+    margin-right: 20px;
+    margin-bottom: 25px;
+}
+.footer-input .MuiInputBase-adornedEnd {
+    background-color: #fff;
+    font-size: 13px;
+}
+.footer-input .Mui-focused .MuiOutlinedInput-notchedOutline {
+    border: none !important;
+    outline: none;
+}
+.footer-copyright {
+    padding: 20px 100px;
+    background-color: #2B2B2B;
+    text-align: center;
+    font-size: 13px;
+    padding-bottom: 3rem;
+    color: white;
+}
+.ad-white-box {
+    display: inline-flex;
+    padding-left: 20px;
+    margin: 0;
+    align-items: center;
+}
+.carousel-box {
+    background: #FADCCB;
+    border-radius: 100%;
+    padding: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 300px;
+    height: 300px;
+}
+
+.carousel-btn-back svg {
+    fill: #635D5D;
+    margin-left: 10px;
+}
+
+.carousel-btn svg {
+    fill: #635D5D;
+}
+.carousel-img {
+    height: 230px;
+    display: block;
+    transform: rotate(15deg);
+    max-width: 230px;
+    overflow: hidden;
+    width: 100%;
+}

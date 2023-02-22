@@ -15,10 +15,12 @@ import Twitter from '../assets/icons/twitter.png';
 import WhatsApp from '../assets/icons/whatsapp.png';
 import YouTube from '../assets/icons/youtube.png';
 import Call from '../assets/icons/call.png';
-import WhatsappChat from '../assets/icons/whatsapp-chat.png';
+import WhatsappChat from '../assets/icons/whatsapp.png';
 import Tick from '../assets/icons/tick.png';
+import WhatsappLogo from '../assets/icons/whatsapp-logo.png';
+import RazorPayLogo from '../assets/icons/razorpay.png';
 
 export const Icons = {
     BackNav, Comments, Notifications, User, Funnel, EllipsisVerical, Edit, Delete, Tick,
-    Facebook, Instagram, LinkedIn, Pinterest, Skype, Twitter, WhatsApp, YouTube, Call, WhatsappChat
+    Facebook, Instagram, LinkedIn, Pinterest, Skype, Twitter, WhatsApp, YouTube, Call, WhatsappChat, WhatsappLogo,RazorPayLogo
 }
