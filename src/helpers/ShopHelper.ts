@@ -4,6 +4,7 @@ import RootStore from "../mobx-store/RootStore";
 import Endpoints from "../services/Endpoints";
 import SecureService from "../services/SecureService";
 import Function from "../utils/Function";
+import HttpClient from "../services/HttpClient";
 
 const ShopHelper = (navigate: NavigateFunction) => {
     let { shopStore, authStore } = RootStore;
@@ -29,6 +30,22 @@ const ShopHelper = (navigate: NavigateFunction) => {
 
         if (resCategories?.status === 'OK') {
             shopStore.businessCategories = resCategories?.data;
+        }
+    }
+
+    const GetShopDetailsByName = async (id: string) => {
+        let resShop: any;
+        shopStore.isLoading = true;
+        shopStore.id = null;
+        resShop =  await HttpClient(navigate).GetResponse(Endpoints.StoreDetails+'/'+id);
+        // resProducts = await SecureService(navigate).GetResponse(Endpoints.ProductStore + params);
+        shopStore.isLoading = false;
+
+        if (resShop?.status === 'OK') {
+            shopStore.storeDetails = resShop?.data;
+            shopStore.id = resShop?.data?.id;
+            shopStore.businessName = resShop?.data?.businessName;
+            shopStore.profileImage = resShop?.data?.profileImage;
         }
     }
 
@@ -123,7 +140,7 @@ const ShopHelper = (navigate: NavigateFunction) => {
 
     return {
         GetCountries, GetCategories, GetShopDetailsByUserId, CreateShop, UpdateShop,
-        UpdateAccountDetails
+        UpdateAccountDetails, GetShopDetailsByName
     };
 }
 

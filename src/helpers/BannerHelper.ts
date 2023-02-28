@@ -4,6 +4,7 @@ import RootStore from "../mobx-store/RootStore";
 import Endpoints from "../services/Endpoints";
 import SecureService from "../services/SecureService";
 import Function from "../utils/Function";
+import HttpClient from "../services/HttpClient";
 
 const BannerHelper = (navigate: NavigateFunction) => {
     let { bannerStore, shopStore } = RootStore;
@@ -20,7 +21,21 @@ const BannerHelper = (navigate: NavigateFunction) => {
             bannerStore.setBannerValues(resBannerDetails?.data);
         }
     }
+    const GetBannerByStoreName = async () => {
+        let resBannerDetails: any;
+        let params = `?storeId=${shopStore.id}`;
 
+        bannerStore.isLoading = true;
+        resBannerDetails = await HttpClient(navigate).GetResponse(Endpoints.Banner + params);
+        bannerStore.isLoading = false;
+
+        if (resBannerDetails?.status === 'OK' && !Function.isEmptyObject(resBannerDetails?.data)) {
+            bannerStore.setBannerValues(resBannerDetails?.data);
+            bannerStore.bannerImage1 = resBannerDetails?.data?.bannerImage1;
+            bannerStore.bannerImage2 = resBannerDetails?.data?.bannerImage2;
+            bannerStore.bannerImage3 = resBannerDetails?.data?.bannerImage3;
+        }
+    }
     const CreateBanner = async () => {
         let resCreateBanner: any;
         let bannerFormData: any = new FormData();
@@ -58,7 +73,7 @@ const BannerHelper = (navigate: NavigateFunction) => {
         }
     }
 
-    return { GetBanner, CreateBanner, UpdateBanner };
+    return { GetBanner, CreateBanner, UpdateBanner,GetBannerByStoreName };
 }
 
 export default BannerHelper;

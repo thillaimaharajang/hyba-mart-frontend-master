@@ -66,7 +66,6 @@ const CustomUpload: React.FC<ICustomUploadProps> = (props) => {
     const onDelete = (imageIndex: any) => {
         props?.onDelete(imageIndex);
     }
-// console.log("props?.showPlusOnly",props?.showPlusOnly)
     return <div className="row m-0">
         {displayImages?.map((displayImage: string | undefined, imageIndex: any) => {
             return <div key={imageIndex} style={previewContainerStyle} className={`image-preview-container ${props?.isMultipleImage ? 'me-3 mb-3' : ''}`}>

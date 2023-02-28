@@ -12,6 +12,7 @@ const Endpoints = {
     ResetPassword: '/user/reset-password',
     RefreshToken: '/user/refresh-token',
     // Store apis
+    Dashboard: '/dashboard',
     GetCountries: '/country',
     GetCategories: '/category',
     StoreDetails: '/store',
@@ -32,7 +33,8 @@ const Endpoints = {
     CheckoutAddress: '/checkoutAddr',
     CheckoutNotes: '/checkoutNotes',
     CheckoutUserDetails: '/checkoutUserDetails',
-    Banner: '/banner'
+    Banner: '/banner',
+    ProductStore: '/product-store'
 }
 
 export default Endpoints;

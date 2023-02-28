@@ -8,7 +8,6 @@ const PaymentModeHelper = (navigate: NavigateFunction) => {
     let { paymentStore, shopStore } = RootStore;
 
     const GetPaymentModes = async () => {
-        console.log("Store",paymentStore)
         let params = `?storeId=${shopStore.id}
          &page=${paymentStore.page}&size=${paymentStore.size}}`;
         let resPaymentModes: any;
@@ -30,7 +29,6 @@ const PaymentModeHelper = (navigate: NavigateFunction) => {
     }
 
     const GetPaymentModesById = async () => {
-        console.log("Store",paymentStore)
         let params = `?storeId=${shopStore.id}
          &page=${paymentStore.page}&size=${paymentStore.size}&id=${paymentStore.id}`;
         let resPaymentModes: any;
@@ -42,7 +40,6 @@ const PaymentModeHelper = (navigate: NavigateFunction) => {
 
         resPaymentModes = await SecureService(navigate).GetResponse(Endpoints.PaymentMode + params);
         paymentStore.isLoading = false;
-console.log(resPaymentModes)
         if (resPaymentModes?.status === 'OK') {
             paymentStore.name=resPaymentModes?.data?.name;
             paymentStore.about=resPaymentModes?.data?.about;

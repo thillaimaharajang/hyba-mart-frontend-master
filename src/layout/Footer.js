@@ -20,11 +20,11 @@ const Footer = (props) => {
  
   return (
    <Box>
-    <Grid container spacing={2} style={{padding: '20px 100px',backgroundColor: '#ECECEC'}}>
-            <Grid item xs={4}>
+    <Grid container spacing={2} style={{padding: '0 100px 20px 100px',backgroundColor: '#ECECEC', alignItems: 'center'}}>
+            <Grid item xs={4} style={{paddingTop: 0}}>
                 <div style={{display: 'flex'}}>
                     <img src={Logo} width="50px" style={{paddingRight: 20, borderRight: '2px solid #23254B'}} />
-                    <h4 style={{display: 'inline-flex', paddingLeft: 20}}>HYBA MART</h4>
+                    <h4 style={{display: 'inline-flex', paddingLeft: 20, marginBottom: 0, alignItems: 'center'}}>HYBA MART</h4>
                 </div>
             </Grid>
             <Grid item xs={8}>

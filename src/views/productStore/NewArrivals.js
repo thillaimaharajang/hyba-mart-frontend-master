@@ -62,7 +62,7 @@ const NewArrivals = (props) => {
         <Grid item className='title-header'>
             <h1 className='title-text'>New Arrivals</h1>
             <div className='title-vector'>
-                <img src={VectorIcon} width="100px" />
+                <img src={VectorIcon} width="120px" />
             </div>
         </Grid>
     </Grid>
