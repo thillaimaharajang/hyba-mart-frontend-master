@@ -28,6 +28,7 @@ export default class ProductStore {
     @observable outOfStockStatus: boolean = false;
     @observable filterProductCategoryId: any = '';
     @observable searchStr: string = '';
+    @observable filterObj: any = {};
     @observable isLoading: boolean = false;
     @observable formCreateProductErrors: any = {};
 

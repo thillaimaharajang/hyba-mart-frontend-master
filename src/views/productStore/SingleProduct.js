@@ -1,13 +1,14 @@
 import * as React from 'react';
 import { Card, CardContent, CardMedia, Typography, IconButton } from '@mui/material';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import Function from "../../utils/Function";
 
 const SingleProduct = ({productData, type}) => {
   return (
     <Card sx={{ width: 260 }} className='product-style'>
       <CardMedia
         sx={{ height: 290 }}
-        image={productData.imagePath}
+        image={Function.loadImagePath(productData.mainImage)}
         title="green iguana"
       />
       {type === 'all' && (

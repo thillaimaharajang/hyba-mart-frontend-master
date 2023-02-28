@@ -12,7 +12,8 @@ import RootStore from "../../../mobx-store/RootStore";
 import { observer } from "mobx-react-lite";
 import { Loader } from "../../../components";
 import ProductCategoryHelper from "../../../helpers/ProductCategoryHelper";
-import twitter from '../../../assets/images/twitter-logo.png'
+import Function from "../../../utils/Function";
+
 const { confirm } = Modal;
 
 const Products: React.FC = () => {
@@ -25,12 +26,12 @@ const Products: React.FC = () => {
             width: '6%'
         },
         {
-            key: "image",
+            key: "mainImage",
             title: "Media",
             width: '8%',
-            render: (image: string) => (
+            render: (mainImage: string) => (
                 <div>
-                    <img src={twitter} alt='product-image' style={{ height: '2rem' }} />
+                    <img src={Function.loadImagePath(mainImage)} alt='product-image' style={{ height: '2rem' }} />
                 </div>
             )
         },
@@ -41,7 +42,7 @@ const Products: React.FC = () => {
             isTrim: true
         },
         {
-            key: "price",
+            key: "offerPrice",
             title: "Price",
             width: '14%'
         },
@@ -51,18 +52,18 @@ const Products: React.FC = () => {
             width: '13%'
         },
         {
-            key: "stock",
+            key: "quantity",
             title: "Stock",
             width: '13%'
         },
         {
-            key: "isActive",
+            key: "status",
             title: "Status",
             width: '11%',
-            render: (isActive: any) => (
+            render: (status: any) => (
                 <div className='d-flex align-items-center'>
-                    <div className={`custom-dot ${isActive ? 'active-dot' : 'inactive-dot'}`} />
-                    <div style={{ color: isActive ? '#46BE82' : '#F6C451' }}>{isActive ? 'Active' : 'Inactive'}</div>
+                    <div className={`custom-dot ${status ? 'active-dot' : 'inactive-dot'}`} />
+                    <div style={{ color: status ? '#46BE82' : '#F6C451' }}>{status ? 'Active' : 'Inactive'}</div>
                 </div>
             )
         },

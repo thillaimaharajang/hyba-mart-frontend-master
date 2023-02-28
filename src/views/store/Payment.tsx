@@ -16,12 +16,9 @@ import AddProductCategory from "./PaymentSetting";
 
 const Payment: React.FC = () => {
     let { paymentStore } = RootStore;
-    console.log("Payment Store: ",paymentStore)
     const navigate = useNavigate();
     let [isCategoryAddModal, toggleAddModal] = useState(false);
     const [isCategoryUpdateModal, toggleUpdateModal] = useState(false);
-    console.log(isCategoryAddModal)
-
     
     const columns: ITableColumn[] = [
         {
@@ -69,7 +66,6 @@ const Payment: React.FC = () => {
     ]
 
     const navigateToEditPayment = (id:any) => {
-        console.log("ID: ",id)
         paymentStore.id=id;
         navigate(id?.toString());
     }
@@ -77,7 +73,6 @@ const Payment: React.FC = () => {
         getPaymentModes();
     }, []);
     const getPaymentModes = async () => {
-        console.log("Payment modes")
         await PaymentModeHelper(navigate).GetPaymentModes();
     }
 

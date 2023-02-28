@@ -169,7 +169,6 @@ const AuthHelper = () => {
 
     const ResetPassword = async (navigate: NavigateFunction, logoutCb: any = null) => {
         let resResetPassword;
-        console.log("authStore?.email",authStore?.email)
         const regResetPasswordPostData = {
             email: authStore?.email,
             password: authStore?.password

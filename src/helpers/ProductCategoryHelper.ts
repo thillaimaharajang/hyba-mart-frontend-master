@@ -3,6 +3,7 @@ import { NavigateFunction } from "react-router-dom";
 import RootStore from "../mobx-store/RootStore";
 import Endpoints from "../services/Endpoints";
 import SecureService from "../services/SecureService";
+import HttpClient from "../services/HttpClient";
 
 const ProductCategoryHelper = (navigate: NavigateFunction) => {
     let { productCategory, shopStore } = RootStore;
@@ -17,6 +18,24 @@ const ProductCategoryHelper = (navigate: NavigateFunction) => {
         productCategory.isLoading = true;
 
         resProductCategories = await SecureService(navigate).GetResponse(Endpoints.ProductCategory + params);
+        productCategory.isLoading = false;
+
+        if (resProductCategories?.status === 'OK') {
+            productCategory.productCategories = resProductCategories?.data;
+            productCategory.page = resProductCategories?.currentPage;
+            productCategory.totalItems = resProductCategories?.totalItems;
+        }
+    }
+    const GetProductCategoriesInsecure = async () => {
+        let params = `?storeId=${shopStore.id}&page=${productCategory.page}&size=${productCategory.size}`;
+        let resProductCategories: any;
+        if (productCategory?.searchStr) {
+            params += `&name=${productCategory?.searchStr}`;
+        }
+
+        productCategory.isLoading = true;
+
+        resProductCategories = await HttpClient(navigate).GetResponse(Endpoints.ProductCategory + params);
         productCategory.isLoading = false;
 
         if (resProductCategories?.status === 'OK') {
@@ -81,7 +100,7 @@ const ProductCategoryHelper = (navigate: NavigateFunction) => {
         }
     }
 
-    return { GetProductCategories, CreateProductCategory, UpdateProductCategory, DeleteProductCategory };
+    return { GetProductCategories, GetProductCategoriesInsecure, CreateProductCategory, UpdateProductCategory, DeleteProductCategory };
 }
 
 export default ProductCategoryHelper;

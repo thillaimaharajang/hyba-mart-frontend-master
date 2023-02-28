@@ -8,6 +8,7 @@ export default class ShopStore {
     @observable countries: any = [];
     @observable businessCategories: any = [];
     @observable businessName: string = '';
+    @observable storeUrl: string = '';
     @observable id: any = 0;
     @observable name: string = '';
     @observable currency: string = '';
