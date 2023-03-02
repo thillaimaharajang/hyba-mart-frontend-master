@@ -38,6 +38,7 @@
     "@emotion/styled": "^11.10.6",
     "@mui/icons-material": "^5.11.9",
     "@mui/material": "^5.11.10",
+    "@mui/lab": "^5.0.0-alpha.121",
     "react-router-dom": "^6.8.1",
     "react-swipeable-views": "^0.14.0",
     "react-swipeable-views-utils": "^0.14.0"
@@ -76,3 +77,5 @@
     "sass": "^1.58.3"
   }
 }
+
+

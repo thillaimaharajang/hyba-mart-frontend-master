@@ -2,10 +2,11 @@ import * as React from 'react';
 import { Card, CardContent, CardMedia, Typography, IconButton } from '@mui/material';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import Function from "../../utils/Function";
+import StarIcon from '@mui/icons-material/Star';
 
 const SingleProduct = ({productData, type}) => {
   return (
-    <Card sx={{ width: 260 }} className='product-style'>
+    <Card sx={{ width: type ==='relatedProduct' ? 220 : 260 }} className='product-style'>
       <CardMedia
         sx={{ height: 290 }}
         image={Function.loadImagePath(productData.mainImage)}
@@ -37,6 +38,25 @@ const SingleProduct = ({productData, type}) => {
             <Typography variant="body2" color="#FC9F66">
                 {productData.desc1}
             </Typography>
+      </CardContent>
+      )}
+      {type ==='relatedProduct' && (
+        <CardContent style={{display: 'flex', justifyContent: 'space-between'}}>
+        <div>
+            <Typography gutterBottom variant="body2" component="div">
+                {productData.name}
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+                {productData.price}
+            </Typography>
+        </div>
+        <div>
+          <StarIcon fontSize='15px' className='rating-yellow' />
+          <StarIcon fontSize='15px' className='rating-yellow' />
+          <StarIcon fontSize='15px' className='rating-yellow' />
+          <StarIcon fontSize='15px' className='rating-yellow' />
+          <StarIcon fontSize='15px' className='rating-yellow' />
+        </div>
       </CardContent>
       )}
       
