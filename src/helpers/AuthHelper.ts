@@ -23,11 +23,11 @@ const AuthHelper = () => {
         authStore.isLoading = false;
 
         if (resLogin?.status === 'OK') {
-            // authStore.isLoggedIn = true;
-            // let stored = LocalStorage.set('authStore',resLogin?.data);
-            // sessionStorage.setItem('authStore',JSON.stringify(resLogin?.data));
+            authStore.isLoggedIn = true;
+            LocalStorage.set('USER_INFO',resLogin?.data);
+            LocalStorage.set('isLoggedIn',true);
+            LocalStorage.set('portal',authStore?.portal);
 
-            // console.log("stored:",stored)
             authStore.setProfileInfo(resLogin?.data);
             message.success(resLogin?.message, 5);
             console.log("shopStore",shopStore)

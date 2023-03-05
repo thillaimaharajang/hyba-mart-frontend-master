@@ -1,12 +1,16 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import ShopHelper from "../../helpers/ShopHelper";
+import AuthHelper from "../../helpers/AuthHelper";
+
 import useLogout from "../../hooks/useLogout";
 import RootStore from "../../mobx-store/RootStore";
 import Function from "../../utils/Function";
+import LocalStorage from "../../storage/LocalStorage";
 
 interface ILoaderProps {
-    visibility: boolean
+    visibility: boolean,
+    isLoggedIn: any
 }
 
 const Loader: React.FC<ILoaderProps> = (props) => {
@@ -15,7 +19,7 @@ const Loader: React.FC<ILoaderProps> = (props) => {
     const logoutCb = useLogout();
 
     useEffect(() => {
-        if (authStore?.isLoggedIn) {
+        if (props?.isLoggedIn) {
             getStoreDetails();
         } else {
             navigate('/login');
@@ -23,6 +27,7 @@ const Loader: React.FC<ILoaderProps> = (props) => {
     }, []);
 
     const getStoreDetails = async () => {
+        await authStore.init()
         await ShopHelper(navigate).GetShopDetailsByUserId();
         shopStore.isInfoModal = Function.isEmptyObject(shopStore.storeDetails);
     }

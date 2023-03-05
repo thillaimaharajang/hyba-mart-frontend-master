@@ -1,5 +1,5 @@
 import { lazy, Suspense, useEffect } from "react";
-import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
+import { Routes, Route, Navigate, useNavigate, useParams, useLocation } from "react-router-dom";
 import Layout from "../layout";
 import RootStore from "../mobx-store/RootStore";
 import { observer } from "mobx-react-lite";
@@ -8,6 +8,7 @@ import NestedSidebar from "../layout/NestedSidebar";
 import Tabs from "../constant/Tabs";
 import CustomSuspense from "../components/CustomSuspense";
 import Function from "../utils/Function";
+import LocalStorage from "../storage/LocalStorage";
 
 const Login = lazy(() => import("../views/authentication/Login"));
 const ProductStore = lazy(() => import("../views/product-store/productStore"));
@@ -29,28 +30,41 @@ const NotFound = lazy(() => import("../components/NotFound"));
 const Router = () => {
   let { authStore, shopStore } = RootStore;
   let navigate = useNavigate();
+  let isLoggedIn = LocalStorage.get('isLoggedIn');
+  let userInfo:any = LocalStorage.get('USER_INFO');
 
+  const location = useLocation();
+  let path = location.pathname;
   useEffect(() => {
-    if (authStore?.isLoggedIn) {
-      navigate('/loader');
-    }
+   
+    if(path.includes('store-login') || path.includes('shopping-cart') || path.includes('/product-store/')){
+  
+    }else{
+      if (isLoggedIn && userInfo?.roleId !== 3) {
+        navigate('/loader');
+      }
+    } 
+
   }, []);
+  
+
+
 
   return <Routes>
     <Route path='login' element={<CustomSuspense><Login /></CustomSuspense>} />
     <Route path='product-store/:id' element={<CustomSuspense><ProductStore /></CustomSuspense>} />
     <Route path='product-store/product/:id' element={<CustomSuspense><ProductDetail /></CustomSuspense>} />
-    <Route path='shopping-cart' element={<CustomSuspense><ShoppingCart /></CustomSuspense>} />
+    <Route path='shopping-cart' element={isLoggedIn?<CustomSuspense><ShoppingCart /></CustomSuspense>:<Navigate to={'/store-login'} />} />
     <Route path='store-login' element={<CustomSuspense><StoreLogin /></CustomSuspense>} />
-    <Route path='order-completion' element={<CustomSuspense><OrderCompletion /></CustomSuspense>} />
-    <Route path='product-shipping' element={<CustomSuspense><ProductShipping /></CustomSuspense>} />
+    <Route path='order-completion' element={isLoggedIn?<CustomSuspense><OrderCompletion /></CustomSuspense>:<Navigate to={'/store-login'} replace />} />
+    <Route path='product-shipping' element={isLoggedIn?<CustomSuspense><ProductShipping /></CustomSuspense>:<Navigate to={'/store-login'} replace />} />
     <Route path='registration' element={<CustomSuspense><Registration /></CustomSuspense>} />
     <Route path='registration-otp-verification' element={<CustomSuspense><RegistrationOTPVerification /></CustomSuspense>} />
     <Route path='account-activation' element={<CustomSuspense><AccountActivation /></CustomSuspense>} />
     <Route path='forgot-password' element={<CustomSuspense><ForgotPassword /></CustomSuspense>} />
     <Route path='forgot-password-otp-verification' element={<CustomSuspense><ForgotPasswordOTPVerification /></CustomSuspense>} />
     <Route path='reset-password' element={<CustomSuspense><ResetPassword /></CustomSuspense>} />
-    <Route path='loader' element={<CustomSuspense><Loader visibility={true} /></CustomSuspense>} />
+    <Route path='loader' element={<CustomSuspense><Loader visibility={true} isLoggedIn={isLoggedIn} /></CustomSuspense>} />
     <Route path='/' element={(authStore.isLoggedIn && authStore.isValidToken) ? <Layout /> : <Navigate to={'login'} replace />}>
       {_routes.map((route, routeIndex) => {
         return route?.path === 'store' ?

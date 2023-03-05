@@ -11,6 +11,7 @@ import RootStore from "../../../mobx-store/RootStore";
 import ShopHelper from "../../../helpers/ShopHelper";
 import ProductCategoryHelper from "../../../helpers/ProductCategoryHelper";
 import BannerHelper from "../../../helpers/BannerHelper";
+import LocalStorage from '../../../storage/LocalStorage';
 
 const ProductStore = (props) => {
 
@@ -18,6 +19,7 @@ const ProductStore = (props) => {
 
   const navigate = useNavigate();
   let { id } = useParams();
+  console.log(id)
 
   useEffect(() => {
     getProductStoreDetails();
@@ -25,6 +27,7 @@ const ProductStore = (props) => {
   
   const getProductStoreDetails = async () => {
     await ShopHelper(navigate).GetShopDetailsByName(id);
+    LocalStorage.set('storeUrl',shopStore?.storeUrl);
 
     if(shopStore.id){
       await BannerHelper(navigate).GetBannerByStoreName(); 

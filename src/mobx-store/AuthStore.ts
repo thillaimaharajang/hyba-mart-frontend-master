@@ -63,21 +63,19 @@ export default class AuthStore {
 
     @action async setUserDetails() {
         const userInfo: IUserInfo | any = await AppStorage.getUserDetails();
-        console.log("userInfo?.accessToken", userInfo?.accessToken)
         if (userInfo?.accessToken) {
-            console.log("userInfo?.email", userInfo?.email)
-            this.userId = userInfo?.userId;
+            this.userId = userInfo?.id;
             this.name = userInfo?.name;
             this.email = userInfo?.email;
             this.password = userInfo?.password;
             this.accessToken = userInfo?.accessToken;
             this.refreshToken = userInfo?.refreshToken;
             this.isLoggedIn = true;
+            this.roleId = userInfo?.roleId;
         }
     }
 
     @action isValidLoginForm() {
-        console.log("came here")
         this.formLoginErrors = {};
 
         if (!this.email) {

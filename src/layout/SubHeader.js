@@ -8,13 +8,17 @@ import '../styles/index.scss';
 import Tops from '../assets/images/top.svg'
 import WomenTop from '../assets/images/women-top.svg'
 import Skirt from '../assets/images/skirt.svg'
+import LocalStorage from '../storage/LocalStorage';
 
 const SubHeader = (props) => {
     // const [language, setLanguage] = useState('English');
 
+    let storeUrl = LocalStorage.get('storeUrl')
+
     const handleLangChange = (event) => {
         setLanguage(event.target.value);
     };
+    
    return (
     <Container>
         <Grid container spacing={2}>
@@ -23,7 +27,7 @@ const SubHeader = (props) => {
             </Grid>
             <Grid item xs={8} className='flexEnd'>
                 <Typography gutterBottom variant="caption" component="span" className='cursor-pointer' color="#FB2E86" style={{marginRight: 20}}>
-                   Home
+                   <a href={storeUrl}>Home</a>
                 </Typography>
                 <Select labelId="label" id="selectLanguage" value="Category" style={{top: '-3px'}} className='dropdown-border dropdown-icon' onChange={handleLangChange} MenuProps={{ style: { maxWidth: '100%', maxHeight: 300, position: 'absolute', color: '#FB2E86' }, disableScrollLock: true }}>
                     <MenuItem value="Category" tabIndex="0" style={{ display: 'none' }}>

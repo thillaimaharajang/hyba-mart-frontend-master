@@ -20,6 +20,8 @@ import Carousel from '../../../components/Carousel';
 import RootStore from "../../../mobx-store/RootStore";
 import Function from "../../../utils/Function"
 import ProductHelper from "../../../helpers/ProductHelper";
+import LocalStorage from '../../../storage/LocalStorage';
+import { message } from "antd";
 
 const Advertisement = (props) => {
   const [showDropdown, setShowDropdown] = useState(false)
@@ -31,14 +33,21 @@ const Advertisement = (props) => {
   bannerImage1 = Function.loadImagePath(bannerStore?.bannerImage1);
   bannerImage2 = Function.loadImagePath(bannerStore?.bannerImage2);
   bannerImage3 = Function.loadImagePath(bannerStore?.bannerImage3);
+  let getMsg = null;
 
   useEffect(() => {
     getBannerDetails();
    }, []);
   
    const navigateToLogin = async() =>{
-    navigate('/store-login');
-  }
+    let isLoggedIn = LocalStorage.get('isLoggedIn');
+    if(isLoggedIn){
+        message.warning(getMsg ? getMsg : "You were already logged in", 5);
+
+    }else{
+        navigate('/store-login');
+
+    }  }
 
    const getBannerDetails = async() =>{
    

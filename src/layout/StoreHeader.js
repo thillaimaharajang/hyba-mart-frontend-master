@@ -12,6 +12,7 @@ import { useNavigate } from "react-router-dom";
 import RootStore from "../mobx-store/RootStore";
 import CartHelper from "../helpers/CartHelper";
 import { message } from "antd";
+import LocalStorage from '../storage/LocalStorage';
 
 const SecondHeader = (props) => {
     const [language, setLanguage] = useState('English');
@@ -27,7 +28,14 @@ const SecondHeader = (props) => {
         setUsd(event.target.value);
     };
     const navigateToLogin = async() =>{
+        let isLoggedIn = LocalStorage.get('isLoggedIn');
+        if(isLoggedIn){
+            message.warning(getMsg ? getMsg : "You were already logged in", 5);
+
+        }else{
             navigate('/store-login');
+
+        }
     }
 
     const getCartItems = async() => {

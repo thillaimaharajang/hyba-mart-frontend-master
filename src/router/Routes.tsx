@@ -43,9 +43,10 @@ const AddLink = lazy(() => import('../views/settings/links/AddLink'));
 const UpdateLink = lazy(() => import('../views/settings/links/UpdateLink'));
 // const ProductStore = lazy(() => import('../views/productStore'));
 
+const ShoppingCart = lazy(() => import("../views/product-store/shoppingCart"));
+
 const Routes: IRoutesProps[] = [
     { path: 'main-dashboard', name: 'Dashboard', element: MainDashboard, icon: 'Dashboard', children: [] },
-    // { path: 'product-store', name: 'Product Store', element: ProductStore, icon: 'Dashboard', children: [] },
     {
         path: 'store', name: 'Store', icon: 'Store', children: [
             { path: 'dashboard', name: 'Dashboard', element: Dashboard, icon: 'Dashboard' },
@@ -102,6 +103,7 @@ const Routes: IRoutesProps[] = [
             // { path: 'logout', name: 'Logout', element: Settings, icon: 'Logout' }
         ]
     }
+
 ]
 
 export default Routes;

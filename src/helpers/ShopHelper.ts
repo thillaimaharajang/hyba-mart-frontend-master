@@ -46,7 +46,7 @@ const ShopHelper = (navigate: NavigateFunction) => {
             shopStore.id = resShop?.data?.id;
             shopStore.businessName = resShop?.data?.businessName;
             shopStore.profileImage = resShop?.data?.profileImage;
-            shopStore.storeUrl = resShop?.data?.storeUrl;
+            shopStore.storeUrl = resShop.data.storeUrl ?  resShop?.data?.storeUrl : `${process.env.REACT_APP_FRONTEND_URL}/#/product-store/${resShop.data.uniqueName}`;
         }
     }
 
@@ -58,6 +58,7 @@ const ShopHelper = (navigate: NavigateFunction) => {
         shopStore.isLoading = false;
 
         if (resShopDetails) {
+
             if (resShopDetails?.status === 'OK') {
                 shopStore.storeDetails = resShopDetails?.data;
                 if (!Function.isEmptyObject(shopStore?.storeDetails)) {
