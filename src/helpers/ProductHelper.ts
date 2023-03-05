@@ -5,6 +5,7 @@ import Endpoints from "../services/Endpoints";
 import SecureService from "../services/SecureService";
 import Function from "../utils/Function";
 import HttpClient from "../services/HttpClient";
+import { Identity } from "@mui/base";
 
 const ProductHelper = (navigate: NavigateFunction) => {
     let { productStore, shopStore } = RootStore;
@@ -30,34 +31,41 @@ const ProductHelper = (navigate: NavigateFunction) => {
 
     const GetProductsbyStoreName = async (id:string) => {
         let resProducts: any;
-
         let params = `?storeId=${shopStore.id}&page=${productStore.page}&size=${productStore.size}`;
         if (productStore?.searchStr) {
             params += `&name=${productStore?.searchStr}`;
         }
-        console.log("FilterObj : ",productStore?.filterObj)
         if(productStore?.filterObj && Object.keys(productStore?.filterObj).length !== 0){
             let filterObj = productStore?.filterObj;
             params += `&${Object.keys(filterObj)[0]}=${Object.values(filterObj)[0]}`
         }
-
-
         productStore.isLoading = true;
         resProducts = await HttpClient(navigate).GetResponse(Endpoints.Product + params);
-
         // resProducts = await SecureService(navigate).GetResponse(Endpoints.ProductStore + params);
         productStore.isLoading = false;
 
         if (resProducts?.status === 'OK') {
             productStore.products = resProducts?.data;
-            productStore.page = resProducts?.currentPage;
-            productStore.totalItems = resProducts?.totalItems;
+        }
+    }
+    
+    const GetProductsbyId = async (id:string) => {
+        let resProducts: any;
+        console.log(id)
+        productStore.isLoading = true;
+        resProducts = await HttpClient(navigate).GetResponse(Endpoints.Product +'/'+ id);
+        console.log("resProducts",resProducts)
+        // resProducts = await SecureService(navigate).GetResponse(Endpoints.ProductStore + params);
+        productStore.isLoading = false;
+
+        if (resProducts?.status === 'OK') {
+            productStore.products = resProducts?.data;
         }
     }
 
 
     const CreateProduct = async () => {
-       
+       console.log("productStore",productStore)
         let resCreateProduct: any;
         let productFormData: any = new FormData();
         productFormData.append('storeId', shopStore?.id);
@@ -69,7 +77,19 @@ const ProductHelper = (navigate: NavigateFunction) => {
         productFormData.append('sku', productStore?.sku);
         productFormData.append('description', Function.convertEditorStateToHtml(productStore?.description));
         productFormData.append('mainImage', productStore?.mainImage);
-        productFormData.append('galleryImages', productStore?.galleryImages);
+        if( productStore?.galleryImage.length){
+            console.log("lenght: ",productStore?.galleryImage.length)
+            productStore?.galleryImage.map((image:any)=>{
+                productFormData.append('galleryImage', image);
+            })
+
+        }else{
+            console.log("nodata: ",productStore?.galleryImage.length)
+        }
+        // Display the key/value pairs
+        // for (var pair of productFormData.entries()) {
+        //     console.log("fd",pair[0]+ ', ' + pair[1]); 
+        // }        
         productFormData.append('measurement', productStore?.measurement);
         productFormData.append('quantity', productStore?.quantity);
         productFormData.append('badgeId', productStore?.badgeId);
@@ -100,7 +120,7 @@ const ProductHelper = (navigate: NavigateFunction) => {
         // productFormData.append('description', Function.convertEditorStateToHtml(productStore?.description));
         productFormData.append('description', productStore?.description);
         productFormData.append('mainImage', productStore?.mainImage);
-        productFormData.append('galleryImages', productStore?.galleryImages);
+        productFormData.append('galleryImage', productStore?.galleryImage);
         productFormData.append('measurement', productStore?.measurement);
         productFormData.append('quantity', productStore?.quantity);
         productFormData.append('badgeId', productStore?.badgeId);
@@ -133,7 +153,7 @@ const ProductHelper = (navigate: NavigateFunction) => {
         }
     }
 
-    return { GetProducts, CreateProduct, UpdateProduct, DeleteProduct,GetProductsbyStoreName };
+    return { GetProducts, CreateProduct, UpdateProduct, DeleteProduct, GetProductsbyStoreName, GetProductsbyId };
 }
 
 export default ProductHelper;

@@ -1,17 +1,24 @@
 /* eslint-disable array-callback-return */
 /* eslint-disable */
 import React, {useState} from 'react';
-import { Grid, Typography, Divider, Select, MenuItem, Container} from '@mui/material';
+import { Grid, Typography, Link, Divider, Select, MenuItem, Container} from '@mui/material';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import PhoneInTalkIcon from '@mui/icons-material/PhoneInTalk';
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import CartIcon from '../assets/images/cart.svg';
 import '../styles/index.scss';
+import { useNavigate } from "react-router-dom";
+import RootStore from "../mobx-store/RootStore";
+import CartHelper from "../helpers/CartHelper";
+import { message } from "antd";
 
 const SecondHeader = (props) => {
     const [language, setLanguage] = useState('English');
     const [usd, setUsd] = useState('USD');
+    const navigate = useNavigate();
+    let { authStore } = RootStore;
+    let getMsg = null;
 
     const handleLangChange = (event) => {
         setLanguage(event.target.value);
@@ -19,7 +26,20 @@ const SecondHeader = (props) => {
     const handleUsdChange = (event) => {
         setUsd(event.target.value);
     };
-  
+    const navigateToLogin = async() =>{
+            navigate('/store-login');
+    }
+
+    const getCartItems = async() => {
+        if(authStore?.userId){
+          await CartHelper(navigate).GetCart(); 
+          navigate('/shopping-cart');
+        }else{
+            message.warning(getMsg ? getMsg : "Please login to view cart", 5);
+            navigate('/store-login');
+        }
+    }
+
    return (
     <Container>
         <Grid container spacing={2}>
@@ -60,10 +80,10 @@ const SecondHeader = (props) => {
                         456
                     </MenuItem>
                 </Select>
-                <Typography gutterBottom variant="caption" component="span" color="#fff" className='cursor-pointer' style={{marginRight: 20}}>
-                   Login <PersonOutlineIcon sx={{ fontSize: "16px" }} />
+                <Typography gutterBottom variant="caption" component="span" color="#fff" className='cursor-pointer' style={{marginRight: 20}} onClick={navigateToLogin}>
+                Login<PersonOutlineIcon sx={{ fontSize: "16px" }} />
                 </Typography>
-                <Typography gutterBottom variant="caption" component="span" color="#fff" className='cursor-pointer' style={{marginRight: 20}}>
+                <Typography gutterBottom variant="caption" component="span" color="#fff" className='cursor-pointer' style={{marginRight: 20}} onClick={getCartItems}>
                    Wishlist <FavoriteBorderIcon sx={{ fontSize: "15px" }} />
                 </Typography>
                 <Typography gutterBottom component="span" color="#fff" className='cursor-pointer'>

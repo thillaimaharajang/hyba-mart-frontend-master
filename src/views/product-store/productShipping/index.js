@@ -1,19 +1,39 @@
 /* eslint-disable array-callback-return */
 /* eslint-disable */
-import React from 'react';
+import React,{useEffect} from 'react';
 import {Grid, Box, Container, Typography, Link } from '@mui/material';
-import SecondHeader from '../../layout/SecondHeader';
-import SubHeader from '../../layout/SubHeader';
-import SecondFooter from '../../layout/SecondFooter';
-import TwitterRoundICon from '../../assets/images/twitterRound.svg';
-import FbRoundICon from '../../assets/images/fbRound.svg';
-import InstaRoundICon from '../../assets/images/instaRound.svg';
-import ProductDetails from './ProductDetails';
-import ProductDescription from './ProductDescription';
-import RelatedProducts from './RelatedProducts';
-import Breadcrumb from '../../components/BreadCrumb';
+import SecondHeader from '../../../layout/StoreHeader';
+import SubHeader from '../../../layout/SubHeader';
+import SecondFooter from '../../../layout/StoreFooter';
+import TwitterRoundICon from '../../../assets/images/twitterRound.svg';
+import FbRoundICon from '../../../assets/images/fbRound.svg';
+import InstaRoundICon from '../../../assets/images/instaRound.svg';
+import ShippingDetails from './ShippingDetails';
+import { useNavigate } from "react-router-dom";
+import CartHelper from "../../../helpers/CartHelper";
+import ShopHelper from "../../../helpers/ShopHelper";
+import PaymentModeHelper from "../../../helpers/PaymentModeHelper";
+import RootStore from "../../../mobx-store/RootStore";
 
-const SingleProduct = (props) => {
+const ProductCheckout = (props) => {
+    let { shopStore } = RootStore;
+
+    useEffect(() => {
+        // if (authStore?.isLoggedIn) {
+            getDetails();
+        // } else {
+        //     navigate('/login');
+        // }
+    }, []);
+    let navigate = useNavigate();
+
+    const getDetails = async () => {
+        await CartHelper(navigate).GetCart();
+        await ShopHelper(navigate).GetShopDetailsByName('tandulkar-15');
+        await PaymentModeHelper(navigate).GetPaymentModes();
+
+    }
+
     const breadcrumbs = [
         <Link underline="hover" variant="caption" key="1" color="inherit" href="/">
           Home
@@ -28,9 +48,11 @@ const SingleProduct = (props) => {
           Pages
         </Link>,
         <Typography key="3" variant="caption" color="#FB2E86">
-          Product Details
+          Shopping Cart
         </Typography>,
       ];
+
+
       
    return (
     <div style={{overflow: 'auto', height: '100vh', fontSize: 13}}>
@@ -46,19 +68,13 @@ const SingleProduct = (props) => {
                     <div className='flexStart' style={{padding: '10px 170px', backgroundColor: '#F6F5FF', height: 200}}>
                     <Container >
                         <Typography style={{marginBottom: 0}} gutterBottom variant="h4" component="div" color="#000000">
-                            Product Details
+                            Checkout
                         </Typography>
-                        <Breadcrumb breadcrumbs={breadcrumbs} separator="." />
+                        {/* <Breadcrumb breadcrumbs={breadcrumbs} separator="." /> */}
                     </Container>
                     </div>
                     <div style={{padding: '5% 170px'}}>
-                        <ProductDetails />
-                    </div>
-                    <div style={{padding: '40px 170px', backgroundColor: '#F9F8FE'}}>
-                        <ProductDescription />
-                    </div>
-                    <div style={{padding: '30px 170px'}}>
-                        <RelatedProducts />
+                        <ShippingDetails />
                     </div>
                     <div style={{backgroundColor: '#EEEFFB', padding: '30px 170px'}}>
                         <SecondFooter></SecondFooter>
@@ -86,4 +102,4 @@ const SingleProduct = (props) => {
   )
 }
 
-export default SingleProduct
+export default ProductCheckout

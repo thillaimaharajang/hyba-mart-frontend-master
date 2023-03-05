@@ -17,7 +17,7 @@ export default class ProductStore {
     @observable sku: string = '';
     @observable description: any | undefined = undefined;
     @observable mainImage: any = [];
-    @observable galleryImages: any = [];
+    @observable galleryImage: any = [];
     @observable measurement: string = '';
     @observable quantity: string = '';
     @observable badgeId: any = '';
@@ -59,6 +59,25 @@ export default class ProductStore {
         this.id = selectedProduct?.id;
         this.name = selectedProduct?.name;
         this.status = selectedProduct?.status;
+        this.formCreateProductErrors = {};
+    }
+
+    
+    @action setProductDetails = (product: any) => {
+        this.sku =  product?.SKU;
+        this.badgeId =  product?.badgeId;
+        this.badgeStatus =  product?.badgeStatus;
+        this.description =  product?.description;
+        this.id =  product?.id;
+        this.mainImage =  product?.mainImage;
+        this.measurement =  product?.measurement;
+        this.name =  product?.name;
+        this.offerPrice =  product?.offerPrice;
+        this.outOfStockStatus =  product?.outOfStock;
+        this.productCategoryId =  product?.productCategoryId;
+        this.quantity =  product?.quantity;
+        this.regularPrice =  product?.regularPrice;
+        this.status =  product?.status;
         this.formCreateProductErrors = {};
     }
 

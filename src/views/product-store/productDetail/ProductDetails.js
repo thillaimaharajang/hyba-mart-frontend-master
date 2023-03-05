@@ -1,44 +1,75 @@
 import React from 'react';
 import {Grid, Link, Container, Typography } from '@mui/material';
-import Premium from '../../assets/images/premium.png';
+import Premium from '../../../assets/images/premium.png';
 import StarIcon from '@mui/icons-material/Star';
-import StarBorderIcon from '@mui/icons-material/StarBorder';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import TwitterRoundICon from '../../assets/images/twitterRound.svg';
-import FbRoundICon from '../../assets/images/fbRound.svg';
-import InstaRoundICon from '../../assets/images/instaRound.svg';
+import TwitterRoundICon from '../../../assets/images/twitterRound.svg';
+import FbRoundICon from '../../../assets/images/fbRound.svg';
+import InstaRoundICon from '../../../assets/images/instaRound.svg';
+import { useNavigate } from "react-router-dom";
+import RootStore from "../../../mobx-store/RootStore";
+import CartHelper from "../../../helpers/CartHelper";
+import { message } from 'antd';
+import Function from "../../../utils/Function";
 
 const ProductDetails = (props) => {
+    const navigate = useNavigate();
+    let { productStore ,authStore, shopStore} = RootStore;
+    console.log("authStore",authStore)
+
+    const productDetail = productStore.products[0];
+    console.log("ProductDetails:",productDetail)
+    const gallery = productDetail.galleryImage ? productDetail.galleryImage : [];
+    const productImage = productDetail.mainImage ? Function.loadImagePath(productDetail.mainImage) : Premium
+   
+    const addProducttoCart = async(id) => {
+        let getMsg = null;
+        if(authStore?.userId){
+            let cartObj = {
+                productId: productDetail?.id,
+                storeId: shopStore?.id,
+                userId: authStore?.userId,
+                quantity: 1
+            }
+            await CartHelper(navigate).addtoCart(cartObj);
+        }else{
+            message.warning(getMsg ? getMsg : "Please Login to Add to Cart", 5);
+            navigate('/store-login');
+        }
+    }
 
     return (
     <Container style={{background: 'white', boxShadow: '0px 0px 25px 10px #F6F4FD'}}>
         <Grid container>
             <Grid item xs={2}>
-                <div><img alt="complex" src={Premium} width="100px"/></div>
-                <div><img alt="complex" src={Premium} width="100px"/></div>
-                <div><img alt="complex" src={Premium} width="100px"/></div>
+                {
+                    gallery.map((image)=>{
+                        return <div><img alt="complex" src={Function.loadImagePath(image.productImage)} width="100px"/></div>
+                    })
+                }
+
             </Grid>
             <Grid item xs={3} style={{display: 'flex', alignItems: 'center'}}>
-                <div><img alt="complex" src={Premium} width="200px"/></div>
+                <div><img alt="complex" src={productImage} width="200px"/></div>
             </Grid>
             <Grid item xs={6} style={{marginTop: 30}}>
                 <Typography gutterBottom variant="h4" component="div">
-                    Playwood arm chair
+                { productDetail.name }
                 </Typography>
                 <Typography variant="caption" gutterBottom component="div" style={{marginBottom: 10}}>
                     <StarIcon fontSize='small' className='rating-yellow' /> <StarIcon className='rating-yellow' fontSize='small'/><StarIcon className='rating-yellow' fontSize='small' /><StarIcon className='rating-yellow' fontSize='small' /><StarIcon className='rating-yellow' fontSize='small' /> (22)
                 </Typography>
                 <Typography variant="caption" gutterBottom component="div" style={{marginBottom: 10}}>
-                    <b>$32.00 <span>$32.00</span></b>
+                    <b>{ productDetail.regularPrice } <span>{ productDetail.offerPrice }</span></b>
                 </Typography>
                 <Typography variant="caption" gutterBottom component="div" style={{marginBottom: 10}}>
                     <b>Color</b>
                 </Typography>
                 <Typography variant="caption" gutterBottom color="#A9ACC6" component="div" style={{marginBottom: 10}}>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris tellus porttitor purus, et volutpat sit.
+                    { productDetail.description }
                 </Typography>
                 <Typography variant="caption" gutterBottom component="div" style={{marginBottom: 10}}>
-                    <b>Add To Cart</b> <FavoriteBorderIcon style={{marginLeft: 20}} fontSize='small'/>
+                    <b>Add To Cart</b> <FavoriteBorderIcon onClick={()=>{addProducttoCart(productDetail.id)}} style={{marginLeft: 20}} fontSize='small'/>
                 </Typography>
                 <Typography variant="caption" gutterBottom component="div" style={{marginBottom: 10}}>
                     <b>Categories:</b>

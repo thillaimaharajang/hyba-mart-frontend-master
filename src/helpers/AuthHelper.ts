@@ -4,15 +4,18 @@ import RootStore from "../mobx-store/RootStore";
 import Endpoints from "../services/Endpoints";
 import HttpClient from "../services/HttpClient";
 import ShopHelper from "./ShopHelper";
+import LocalStorage from "../storage/LocalStorage";
 
 const AuthHelper = () => {
     let { authStore, shopStore } = RootStore;
 
     const Login = async (navigate: NavigateFunction, logoutCb: any) => {
+        console.log("Logging in from ",authStore?.portal)
         let resLogin: any;
         const loginPostData = {
             email: authStore?.email,
-            password: authStore?.password
+            password: authStore?.password,
+            portal: authStore?.portal
         };
 
         authStore.isLoading = true;
@@ -20,16 +23,30 @@ const AuthHelper = () => {
         authStore.isLoading = false;
 
         if (resLogin?.status === 'OK') {
-            authStore.isLoggedIn = true;
+            // authStore.isLoggedIn = true;
+            // let stored = LocalStorage.set('authStore',resLogin?.data);
+            // sessionStorage.setItem('authStore',JSON.stringify(resLogin?.data));
+
+            // console.log("stored:",stored)
             authStore.setProfileInfo(resLogin?.data);
             message.success(resLogin?.message, 5);
-            await ShopHelper(navigate).GetShopDetailsByUserId();
-            if (shopStore?.storeDetails?.id) {
-                navigate('/main-dashboard', { replace: true });
-            } else {
-                shopStore.isInfoModal = true;
-                navigate('/settings', { replace: true });
-            }
+            console.log("shopStore",shopStore)
+            if (authStore.roleId === 3){
+                navigate('/product-store/'+shopStore?.storeDetails?.uniqueName, { replace: true });
+            }else{
+                if(authStore.portal === 'admin'){
+                    await ShopHelper(navigate).GetShopDetailsByUserId();
+                    if (shopStore?.storeDetails?.id) {
+                        navigate('/main-dashboard', { replace: true });
+                    } else {
+                        shopStore.isInfoModal = true;
+                        navigate('/settings', { replace: true });
+                    }
+                }else{
+                    navigate('/product-store/'+shopStore?.storeDetails?.uniqueName, { replace: true });
+                }
+
+            }           
         }
     }
 

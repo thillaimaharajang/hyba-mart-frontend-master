@@ -48,6 +48,7 @@ const Login: React.FC = () => {
 
     const onSubmitLogin = async (event: any) => {
         event.preventDefault()
+        authStore.portal = 'admin';
         if (authStore?.isValidLoginForm()) {
             isValidForm = true;
             await AuthHelper().Login(navigate, logoutCb);

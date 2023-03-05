@@ -3,23 +3,23 @@
 import React, { useState ,useEffect } from 'react'
 import { useNavigate } from "react-router-dom";
 import { Button, Grid, Box, Typography,List, ListItem, Stack } from '@mui/material'
-import Logo from '../../assets/images/logo.svg'
-import LetsConnect from '../../assets/images/letsConnect.svg'
-import HandMBrand from '../../assets/images/brands/hm.svg'
-import ObeyBrand from '../../assets/images/brands/obey.svg'
-import ArrowBrand from '../../assets/images/brands/arrow.svg'
-import LactoseBrand from '../../assets/images/brands/lactose.svg'
-import LevisBrand from '../../assets/images/brands/levis.svg'
-import LouisBrand from '../../assets/images/brands/louis.svg'
-import Tops from '../../assets/images/top.svg'
-import WomenTop from '../../assets/images/women-top.svg'
-import Skirt from '../../assets/images/skirt.svg'
-import Shirt from '../../assets/images/shirt.svg'
+import Logo from '../../../assets/images/logo.svg'
+import LetsConnect from '../../../assets/images/letsConnect.svg'
+import HandMBrand from '../../../assets/images/brands/hm.svg'
+import ObeyBrand from '../../../assets/images/brands/obey.svg'
+import ArrowBrand from '../../../assets/images/brands/arrow.svg'
+import LactoseBrand from '../../../assets/images/brands/lactose.svg'
+import LevisBrand from '../../../assets/images/brands/levis.svg'
+import LouisBrand from '../../../assets/images/brands/louis.svg'
+import Tops from '../../../assets/images/top.svg'
+import WomenTop from '../../../assets/images/women-top.svg'
+import Skirt from '../../../assets/images/skirt.svg'
+import Shirt from '../../../assets/images/shirt.svg'
 import PersonIcon from '@mui/icons-material/Person';
-import Carousel from '../../components/Carousel';
-import RootStore from "../../mobx-store/RootStore";
-import Function from "../../utils/Function"
-import ProductHelper from "../../helpers/ProductHelper";
+import Carousel from '../../../components/Carousel';
+import RootStore from "../../../mobx-store/RootStore";
+import Function from "../../../utils/Function"
+import ProductHelper from "../../../helpers/ProductHelper";
 
 const Advertisement = (props) => {
   const [showDropdown, setShowDropdown] = useState(false)
@@ -32,23 +32,18 @@ const Advertisement = (props) => {
   bannerImage2 = Function.loadImagePath(bannerStore?.bannerImage2);
   bannerImage3 = Function.loadImagePath(bannerStore?.bannerImage3);
 
-  console.log("bannerImage1: ",bannerImage1);
-  
-  console.log("bannerImage2: ",bannerImage2,bannerStore?.bannerImage2);
-  console.log("bannerImage3: ",bannerImage3, bannerStore?.bannerImage3);  
   useEffect(() => {
     getBannerDetails();
    }, []);
   
+   const navigateToLogin = async() =>{
+    navigate('/store-login');
+  }
 
    const getBannerDetails = async() =>{
    
     
    }
-   console.log("bannerStore: ",bannerStore)
-
- 
- 
 
   const filterProducts = async(value) =>{
 
@@ -62,15 +57,19 @@ const Advertisement = (props) => {
   }
   const images = [
     {
-      imgPath: bannerImage1
+      key: 0,
+      imgPath: bannerImage1,
+      label: "bannerImage1"
     },
     {
-      imgPath: bannerImage2
-
+      key: 1,
+      imgPath: bannerImage2,
+      label: "bannerImage2"
     },
     {
-      imgPath: bannerImage3
-
+      key: 2,
+      imgPath: bannerImage3,
+      label: "bannerImage3"
     }
   ];
   return (
@@ -88,7 +87,7 @@ const Advertisement = (props) => {
               }} component="span" style={{marginRight: 15, marginBottom: 0, cursor: 'pointer-'}}>
                 <b>Categories</b>
               </Typography>
-              <Button style={{backgroundColor: '#FC9F66', boxShadow: 'none'}} variant="contained" startIcon={<PersonIcon />}>
+              <Button onClick={navigateToLogin} style={{backgroundColor: '#FC9F66', boxShadow: 'none'}} variant="contained" startIcon={<PersonIcon />}>
                 Sign In
               </Button>
             </Grid>

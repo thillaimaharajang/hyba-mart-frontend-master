@@ -2,9 +2,9 @@
 /* eslint-disable */
 import React from 'react'
 import { Container, Grid, Box } from '@mui/material'
-import VectorIcon from '../../assets/images/vectorIcon.svg'
+import VectorIcon from '../../../assets/images/vectorIcon.svg'
 import SingleProduct from './SingleProduct'
-import Image1 from '../../assets/images/img1.svg'
+import Image1 from '../../../assets/images/img1.svg'
 
 const NewArrivals = (props) => {
     const data = [

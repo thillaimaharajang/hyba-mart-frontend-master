@@ -1,17 +1,43 @@
 /* eslint-disable array-callback-return */
 /* eslint-disable */
-import React from 'react';
+import React,{useEffect} from 'react';
 import {Grid, Box, Container, Typography, Link } from '@mui/material';
-import SecondHeader from '../../layout/SecondHeader';
-import SubHeader from '../../layout/SubHeader';
-import SecondFooter from '../../layout/SecondFooter';
-import TwitterRoundICon from '../../assets/images/twitterRound.svg';
-import FbRoundICon from '../../assets/images/fbRound.svg';
-import InstaRoundICon from '../../assets/images/instaRound.svg';
-import Breadcrumb from '../../components/BreadCrumb';
-import CartDetails from './CartDetails';
+import SecondHeader from '../../../layout/StoreHeader';
+import SubHeader from '../../../layout/SubHeader';
+import SecondFooter from '../../../layout/StoreFooter';
+import TwitterRoundICon from '../../../assets/images/twitterRound.svg';
+import FbRoundICon from '../../../assets/images/fbRound.svg';
+import InstaRoundICon from '../../../assets/images/instaRound.svg';
+import ProductDetails from './ProductDetails';
+import ProductDescription from './ProductDescription';
+import RelatedProducts from './RelatedProducts';
+import Breadcrumb from '../../../components/BreadCrumb';
+import { useNavigate,useParams } from "react-router-dom";
+import RootStore from "../../../mobx-store/RootStore";
+import ProductHelper from "../../../helpers/ProductHelper";
+import ShopHelper from "../../../helpers/ShopHelper";
 
-const ShoppingCart = (props) => {
+const ProductDetail = (props) => {   
+    const navigate = useNavigate(); 
+    const {productStore} = RootStore
+    let { id } = useParams();
+
+    useEffect(() => {
+        console.log("Getting product details")
+      getProductDetails();
+    }, []);
+    
+    const getProductDetails = async () => {
+        await ProductHelper(navigate).GetProductsbyId(id);
+  
+      if(productStore.products[0].id){
+        console.log("Product Id available");
+        await ShopHelper(navigate).GetShopDetailsByName(productStore.products[0].storeId);
+
+      }else{
+        navigate('/main-dashboard', { replace: true });
+      }
+    }
     const breadcrumbs = [
         <Link underline="hover" variant="caption" key="1" color="inherit" href="/">
           Home
@@ -26,7 +52,7 @@ const ShoppingCart = (props) => {
           Pages
         </Link>,
         <Typography key="3" variant="caption" color="#FB2E86">
-          Shopping Cart
+          Product Details
         </Typography>,
       ];
       
@@ -44,13 +70,19 @@ const ShoppingCart = (props) => {
                     <div className='flexStart' style={{padding: '10px 170px', backgroundColor: '#F6F5FF', height: 200}}>
                     <Container >
                         <Typography style={{marginBottom: 0}} gutterBottom variant="h4" component="div" color="#000000">
-                            Shopping Cart
+                            Product Details
                         </Typography>
                         <Breadcrumb breadcrumbs={breadcrumbs} separator="." />
                     </Container>
                     </div>
                     <div style={{padding: '5% 170px'}}>
-                        <CartDetails />
+                        <ProductDetails />
+                    </div>
+                    <div style={{padding: '40px 170px', backgroundColor: '#F9F8FE'}}>
+                        <ProductDescription />
+                    </div>
+                    <div style={{padding: '30px 170px'}}>
+                        <RelatedProducts />
                     </div>
                     <div style={{backgroundColor: '#EEEFFB', padding: '30px 170px'}}>
                         <SecondFooter></SecondFooter>
@@ -78,4 +110,4 @@ const ShoppingCart = (props) => {
   )
 }
 
-export default ShoppingCart
+export default ProductDetail

@@ -10,12 +10,13 @@ import CustomSuspense from "../components/CustomSuspense";
 import Function from "../utils/Function";
 
 const Login = lazy(() => import("../views/authentication/Login"));
-const ProductStore = lazy(() => import("../views/productStore"));
-const SingleProduct = lazy(() => import("../views/singleProduct"));
-const ShoppingCart = lazy(() => import("../views/shoppingCart"));
-const AccountLogin = lazy(() => import("../views/myAccount"));
+const ProductStore = lazy(() => import("../views/product-store/productStore"));
+
+const ProductDetail = lazy(() => import("../views/product-store/productDetail"));
+const ShoppingCart = lazy(() => import("../views/product-store/shoppingCart"));
+const StoreLogin = lazy(() => import("../views/product-store/userAccount"));
 const OrderCompletion = lazy(() => import("../views/orderCompletion"));
-const ProductShipping = lazy(() => import("../views/productShipping"));
+const ProductShipping = lazy(() => import("../views/product-store/productShipping"));
 const Registration = lazy(() => import("../views/authentication/Registration"));
 const RegistrationOTPVerification = lazy(() => import("../views/authentication/RegistrationOTPVerification"));
 const ResetPassword = lazy(() => import("../views/authentication/ResetPassword"));
@@ -38,9 +39,9 @@ const Router = () => {
   return <Routes>
     <Route path='login' element={<CustomSuspense><Login /></CustomSuspense>} />
     <Route path='product-store/:id' element={<CustomSuspense><ProductStore /></CustomSuspense>} />
-    <Route path='single-product' element={<CustomSuspense><SingleProduct /></CustomSuspense>} />
+    <Route path='product-store/product/:id' element={<CustomSuspense><ProductDetail /></CustomSuspense>} />
     <Route path='shopping-cart' element={<CustomSuspense><ShoppingCart /></CustomSuspense>} />
-    <Route path='account-login' element={<CustomSuspense><AccountLogin /></CustomSuspense>} />
+    <Route path='store-login' element={<CustomSuspense><StoreLogin /></CustomSuspense>} />
     <Route path='order-completion' element={<CustomSuspense><OrderCompletion /></CustomSuspense>} />
     <Route path='product-shipping' element={<CustomSuspense><ProductShipping /></CustomSuspense>} />
     <Route path='registration' element={<CustomSuspense><Registration /></CustomSuspense>} />

@@ -4,13 +4,13 @@ import React,{useEffect} from 'react';
 import Advertisement from './Advertisement'
 import NewArrivals from './NewArrivals'
 import AllProducts from './AllProducts'
-import Footer from '../../layout/Footer'
+import Footer from '../../../layout/Footer'
 import { useNavigate,useParams } from "react-router-dom";
-import ProductHelper from "../../helpers/ProductHelper";
-import RootStore from "../../mobx-store/RootStore";
-import ShopHelper from "../../helpers/ShopHelper";
-import ProductCategoryHelper from "../../helpers/ProductCategoryHelper";
-import BannerHelper from "../../helpers/BannerHelper";
+import ProductHelper from "../../../helpers/ProductHelper";
+import RootStore from "../../../mobx-store/RootStore";
+import ShopHelper from "../../../helpers/ShopHelper";
+import ProductCategoryHelper from "../../../helpers/ProductCategoryHelper";
+import BannerHelper from "../../../helpers/BannerHelper";
 
 const ProductStore = (props) => {
 
@@ -34,6 +34,7 @@ const ProductStore = (props) => {
       navigate('/main-dashboard', { replace: true });
     }
   }
+  
    return (
     <div style={{overflow: 'auto', height: '100vh'}}>
     <Advertisement />

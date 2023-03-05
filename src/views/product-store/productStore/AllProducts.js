@@ -1,19 +1,19 @@
 /* eslint-disable array-callback-return */
 /* eslint-disable */
 import React,{useEffect} from 'react';
-import { useNavigate } from "react-router-dom";
-import RootStore from "../../mobx-store/RootStore";
+import RootStore from "../../../mobx-store/RootStore";
 import { observer } from "mobx-react-lite";
 
 import { Container, Grid, Box } from '@mui/material';
-import VectorIcon from '../../assets/images/vectorIcon.svg';
+import VectorIcon from '../../../assets/images/vectorIcon.svg';
 import SingleProduct from './SingleProduct';
-import ProductHelper from "../../helpers/ProductHelper";
+import ProductHelper from "../../../helpers/ProductHelper";
 
 const AllProducts = (props) => {
   const { productStore } = RootStore;
+  console.log("productStore?.products",productStore?.products)
   let data = productStore?.products;
-
+  
   return (
    <Box>
     <Container className='container-bg'>
@@ -26,7 +26,7 @@ const AllProducts = (props) => {
         </Grid>
     </Grid>
     <Grid container>
-        <Grid>
+        <Grid >
             {
             data.map((product, i)=> (
                 <SingleProduct key={i} type='all' productData={product} />

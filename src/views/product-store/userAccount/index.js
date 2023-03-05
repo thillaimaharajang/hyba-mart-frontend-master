@@ -2,16 +2,16 @@
 /* eslint-disable */
 import React from 'react';
 import {Grid, Box, Container, Typography, Link } from '@mui/material';
-import SecondHeader from '../../layout/SecondHeader';
-import SubHeader from '../../layout/SubHeader';
-import SecondFooter from '../../layout/SecondFooter';
-import TwitterRoundICon from '../../assets/images/twitterRound.svg';
-import FbRoundICon from '../../assets/images/fbRound.svg';
-import InstaRoundICon from '../../assets/images/instaRound.svg';
-import Breadcrumb from '../../components/BreadCrumb';
+import SecondHeader from '../../../layout/StoreHeader';
+import SubHeader from '../../../layout/SubHeader';
+import SecondFooter from '../../../layout/StoreFooter';
+import TwitterRoundICon from '../../../assets/images/twitterRound.svg';
+import FbRoundICon from '../../../assets/images/fbRound.svg';
+import InstaRoundICon from '../../../assets/images/instaRound.svg';
+import Breadcrumb from '../../../components/BreadCrumb';
 import Login from './Login';
 
-const AccountLogin = (props) => {
+const StoreLogin = (props) => {
     const breadcrumbs = [
         <Link underline="hover" variant="caption" key="1" color="inherit" href="/">
           Home
@@ -78,4 +78,4 @@ const AccountLogin = (props) => {
   )
 }
 
-export default AccountLogin
+export default StoreLogin

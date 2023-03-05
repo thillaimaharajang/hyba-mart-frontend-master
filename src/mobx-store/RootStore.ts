@@ -16,6 +16,9 @@ import NotificationStore from "./NotificationStore";
 import CheckoutStore from "./CheckoutStore";
 import BannerStore from "./BannerStore";
 import PaymentStore from "./PaymentStore";
+import CartStore from "./CartStore";
+import ShippingStore from "./ShippingStore";
+
 
 class RootStore {
     commonStore: CommonStore;
@@ -36,7 +39,8 @@ class RootStore {
     checkoutStore: CheckoutStore;
     bannerStore: BannerStore;
     paymentStore: PaymentStore;
-
+    cartStore : CartStore
+    shippingStore: ShippingStore;
     constructor() {
         this.commonStore = new CommonStore();
         this.authStore = new AuthStore();
@@ -56,6 +60,8 @@ class RootStore {
         this.checkoutStore = new CheckoutStore();
         this.bannerStore = new BannerStore();
         this.paymentStore = new PaymentStore();
+        this.cartStore = new CartStore();
+        this.shippingStore = new ShippingStore();
 
     }
 }

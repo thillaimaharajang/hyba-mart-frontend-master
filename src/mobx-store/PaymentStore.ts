@@ -15,6 +15,7 @@ export default class PaymentModeStore {
     @observable publishKey: string | undefined = '';
     @observable secretKey: string | undefined = '';
     @observable webHookUrl: string | undefined = '';
+    @observable paymentModeId: number | undefined = 0;
     @observable isEnabled: boolean | undefined = false;
     @observable isLoading: boolean = false;
     @observable formCreatePaymentModeErrors: any = {};

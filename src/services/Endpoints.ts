@@ -18,10 +18,12 @@ const Endpoints = {
     StoreDetails: '/store',
     ProductCategory: '/product-category',
     PaymentMode: '/payment',
+    Order: '/order',
     Badge: '/badge',
     Charges: '/charge',
     Attributes: '/attribute',
     Product: '/product',
+    Cart: '/cart',
     Contact: '/contact',
     SocialLink: '/social-link',
     Links: '/link',
@@ -34,7 +36,8 @@ const Endpoints = {
     CheckoutNotes: '/checkoutNotes',
     CheckoutUserDetails: '/checkoutUserDetails',
     Banner: '/banner',
-    ProductStore: '/product-store'
+    ProductStore: '/product-store',
+    ProductDetails:'/product-store/product/'
 }
 
 export default Endpoints;

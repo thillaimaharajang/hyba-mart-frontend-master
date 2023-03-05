@@ -2,9 +2,9 @@
 /* eslint-disable */
 import React from 'react';
 import {Grid, Box, Container, Typography, Link } from '@mui/material';
-import SecondHeader from '../../layout/SecondHeader';
+import SecondHeader from '../../layout/StoreHeader';
 import SubHeader from '../../layout/SubHeader';
-import SecondFooter from '../../layout/SecondFooter';
+import SecondFooter from '../../layout/StoreFooter';
 import TwitterRoundICon from '../../assets/images/twitterRound.svg';
 import FbRoundICon from '../../assets/images/fbRound.svg';
 import InstaRoundICon from '../../assets/images/instaRound.svg';

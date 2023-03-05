@@ -90,7 +90,8 @@ const AddProductCategories: React.FC<IAddPrductCategoryProps> = (props) => {
         if (name === 'mainImage') {
             productStore.mainImage = event?.target?.files[0];
         } else if (name === 'galleryImage') {
-            productStore.galleryImages.push(event?.target?.files[0]);
+            productStore.galleryImage.push(event?.target?.files[0]);
+            console.log("productStore.galleryImage",productStore.galleryImage)
         }
 
         if (!isValidForm) {
@@ -102,7 +103,7 @@ const AddProductCategories: React.FC<IAddPrductCategoryProps> = (props) => {
         if (name === 'mainImage') {
             productStore.mainImage = '';
         } else if (name === 'galleryImage') {
-            productStore.galleryImages?.splice(imageIndex, 1);
+            productStore.galleryImage?.splice(imageIndex, 1);
         }
     }
 
@@ -228,7 +229,7 @@ const AddProductCategories: React.FC<IAddPrductCategoryProps> = (props) => {
                             <div className="col-9 mx-3">
                                 <div style={{ fontSize: '10px', color: '#635D5D' }}>Gallery</div>
                                 <FormGroup label='' labelSpacing='mb-1' error={productStore?.formCreateProductErrors?.galleryImage}>
-                                    <CustomUpload value={toJS(productStore.galleryImages)} onChange={(event: any) => onChangeImage(event, 'galleryImage')}
+                                    <CustomUpload value={toJS(productStore.galleryImage)} onChange={(event: any) => onChangeImage(event, 'galleryImage')}
                                         previewContainerStyle={{ height: '3.5rem', width: '3.5rem', backgroundColor: '#2b0b6e', padding: '15px', borderRadius: '8px' }}
                                         uploadBtnStyle={{ height: '5rem', width: '5rem' }} isMultipleImage
                                         maxSize={2} accept='.png' onDelete={(imageIndex: any) => onImageDelete('galleryImage', imageIndex)} />

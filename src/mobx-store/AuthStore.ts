@@ -8,6 +8,7 @@ export default class AuthStore {
     @observable userId: number = 0;
     @observable name: string = '';
     @observable email: string = '';
+    @observable roleId: number = 3;
     @observable isPrivacyPolicyEnabled: boolean = false;
     @observable password: string = '';
     @observable confirmPassword: string = '';
@@ -17,6 +18,7 @@ export default class AuthStore {
     @observable isValidToken: boolean = false;
     @observable accessToken: string = '';
     @observable refreshToken: string = '';
+    @observable portal: string = '';
     @observable isLoading: boolean = false;
     @observable formLoginErrors: any = {};
     @observable formRegistrationErrors: any = {};
@@ -75,6 +77,7 @@ export default class AuthStore {
     }
 
     @action isValidLoginForm() {
+        console.log("came here")
         this.formLoginErrors = {};
 
         if (!this.email) {
@@ -196,11 +199,13 @@ export default class AuthStore {
             'email': userData?.email,
             'password': this.password,
             'name': userData?.name,
+            'roleId': userData?.roleId,
             'accessToken': userData?.accessToken,
             'refreshToken': userData?.refreshToken
         }
         this.userId = userData?.id;
         this.email = userData?.email;
+        this.roleId = userData?.roleId;
         this.accessToken = userData?.accessToken;
         this.refreshToken = userData?.refreshToken;
         if (this.isRememberMe || isLoginWithGoogle) {

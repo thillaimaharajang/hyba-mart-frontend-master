@@ -2,7 +2,7 @@ import { PageTransition } from "../../components";
 import RootStore from "../../mobx-store/RootStore";
 import { observer } from 'mobx-react-lite';
 import React,{useEffect} from 'react';
-import DashboardHelper from "../../helpers/dashboardHelper"
+import DashboardHelper from "../../helpers/DashboardHelper"
 import { useNavigate } from "react-router-dom";
 
 const Dashboard: React.FC = () => {

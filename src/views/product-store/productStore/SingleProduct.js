@@ -1,16 +1,28 @@
 import * as React from 'react';
 import { Card, CardContent, CardMedia, Typography, IconButton } from '@mui/material';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import Function from "../../utils/Function";
+import Function from "../../../utils/Function";
 import StarIcon from '@mui/icons-material/Star';
+import { useNavigate } from "react-router-dom";
+import RootStore from "../../../mobx-store/RootStore";
+import Endpoints from "../../../services/Endpoints";
 
 const SingleProduct = ({productData, type}) => {
+  const navigate = useNavigate();
+  let { productStore } = RootStore;
+
+  const showProductDetails = async(product) => {
+    // productStore.setProductDetails(product)
+    console.log(Endpoints.ProductDetails+product.id)
+    navigate(Endpoints.ProductDetails+product.id, { replace: true });
+  }
   return (
     <Card sx={{ width: type ==='relatedProduct' ? 220 : 260 }} className='product-style'>
       <CardMedia
         sx={{ height: 290 }}
         image={Function.loadImagePath(productData.mainImage)}
         title="green iguana"
+        onClick = {()=>{showProductDetails(productData)}}
       />
       {type === 'all' && (
         <CardContent style={{display: 'flex', justifyContent: 'space-between'}}>

@@ -2,15 +2,16 @@
 /* eslint-disable */
 import React from 'react';
 import {Grid, Box, Container, Typography, Link } from '@mui/material';
-import SecondHeader from '../../layout/SecondHeader';
-import SubHeader from '../../layout/SubHeader';
-import SecondFooter from '../../layout/SecondFooter';
-import TwitterRoundICon from '../../assets/images/twitterRound.svg';
-import FbRoundICon from '../../assets/images/fbRound.svg';
-import InstaRoundICon from '../../assets/images/instaRound.svg';
-import ShippingDetails from './ShippingDetails';
+import SecondHeader from '../../../layout/StoreHeader';
+import SubHeader from '../../../layout/SubHeader';
+import SecondFooter from '../../../layout/StoreFooter';
+import TwitterRoundICon from '../../../assets/images/twitterRound.svg';
+import FbRoundICon from '../../../assets/images/fbRound.svg';
+import InstaRoundICon from '../../../assets/images/instaRound.svg';
+import Breadcrumb from '../../../components/BreadCrumb';
+import CartDetails from './CartDetails';
 
-const ProductCheckout = (props) => {
+const ShoppingCart = (props) => {
     const breadcrumbs = [
         <Link underline="hover" variant="caption" key="1" color="inherit" href="/">
           Home
@@ -28,6 +29,7 @@ const ProductCheckout = (props) => {
           Shopping Cart
         </Typography>,
       ];
+
       
    return (
     <div style={{overflow: 'auto', height: '100vh', fontSize: 13}}>
@@ -43,13 +45,13 @@ const ProductCheckout = (props) => {
                     <div className='flexStart' style={{padding: '10px 170px', backgroundColor: '#F6F5FF', height: 200}}>
                     <Container >
                         <Typography style={{marginBottom: 0}} gutterBottom variant="h4" component="div" color="#000000">
-                            Checkout
+                            Shopping Cart
                         </Typography>
-                        {/* <Breadcrumb breadcrumbs={breadcrumbs} separator="." /> */}
+                        <Breadcrumb breadcrumbs={breadcrumbs} separator="." />
                     </Container>
                     </div>
                     <div style={{padding: '5% 170px'}}>
-                        <ShippingDetails />
+                        <CartDetails />
                     </div>
                     <div style={{backgroundColor: '#EEEFFB', padding: '30px 170px'}}>
                         <SecondFooter></SecondFooter>
@@ -77,4 +79,4 @@ const ProductCheckout = (props) => {
   )
 }
 
-export default ProductCheckout
+export default ShoppingCart

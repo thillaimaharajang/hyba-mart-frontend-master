@@ -46,6 +46,7 @@ const ShopHelper = (navigate: NavigateFunction) => {
             shopStore.id = resShop?.data?.id;
             shopStore.businessName = resShop?.data?.businessName;
             shopStore.profileImage = resShop?.data?.profileImage;
+            shopStore.storeUrl = resShop?.data?.storeUrl;
         }
     }
 
