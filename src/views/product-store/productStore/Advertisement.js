@@ -29,15 +29,16 @@ const Advertisement = (props) => {
   const { bannerStore , productCategory , productStore, shopStore} = RootStore;
   const navigate = useNavigate();
   const profileImage = Function.loadImagePath(shopStore?.storeDetails?.profileImage);
+ 
   let bannerImage1,bannerImage2,bannerImage3;
+  console.log("bannerStore",bannerStore)
+
   bannerImage1 = Function.loadImagePath(bannerStore?.bannerImage1);
+  console.log("bannerImage1",bannerImage1)
+
   bannerImage2 = Function.loadImagePath(bannerStore?.bannerImage2);
   bannerImage3 = Function.loadImagePath(bannerStore?.bannerImage3);
   let getMsg = null;
-
-  useEffect(() => {
-    getBannerDetails();
-   }, []);
   
    const navigateToLogin = async() =>{
     let isLoggedIn = LocalStorage.get('isLoggedIn');
@@ -49,10 +50,6 @@ const Advertisement = (props) => {
 
     }  }
 
-   const getBannerDetails = async() =>{
-   
-    
-   }
 
   const filterProducts = async(value) =>{
 

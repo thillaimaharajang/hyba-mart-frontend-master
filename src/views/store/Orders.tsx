@@ -109,7 +109,7 @@ const Orders: React.FC = () => {
                 dropdownList={productCategory.productCategories} dropdownValue={productStore?.filterProductCategoryId}
                 onChangeDropdown={onChangeSelectValue} onClickDropdown={onClickSelectValue}
             />
-            <CustomTable columns={columns} datas={productStore?.products}
+            <CustomTable columns={columns} datas={orderStore?.orders}
                 defaultPaginationCurrent={1} paginationCurrent={productStore?.page}
                 paginationTotal={productStore?.totalItems}
                 isLoading={productStore?.isLoading} />
