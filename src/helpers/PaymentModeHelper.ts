@@ -8,7 +8,7 @@ const PaymentModeHelper = (navigate: NavigateFunction) => {
     let { paymentStore, shopStore } = RootStore;
 
     const GetPaymentModes = async () => {
-        let params = `?storeId=${shopStore.id}
+        let params = `?storeId=${shopStore?.storeDetails?.id}
          &page=${paymentStore.page}&size=${paymentStore.size}}`;
         let resPaymentModes: any;
         if (paymentStore?.searchStr) {

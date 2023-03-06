@@ -16,7 +16,7 @@ import OrderHelper from "../../../helpers/OrderHelper";
 
 const ShippingDetails = (props) => {
     const [value, setValue] = useState('');
-    let { paymentStore, cartStore ,shippingStore } = RootStore;
+    let { paymentStore, cartStore ,shippingStore,shopStore,authStore } = RootStore;
 
    console.log("paymentStore",paymentStore)
    
@@ -84,8 +84,8 @@ const ShippingDetails = (props) => {
             name: shippingStore?.firstName +" "+ shippingStore?.lastName,
             address:"new addess",
             price: shippingStore?.orderTotal,
-            userId:"14491ada-4188-404d-bf2e-94af7f25b675",
-            storeId:15,
+            userId:authStore?.userId,
+            storeId:shopStore?.storeDetails?.id,
             paymentModeId:shippingStore?.paymentModeId,
             paymentId:shippingStore?.paymentId,
 
@@ -95,39 +95,42 @@ const ShippingDetails = (props) => {
 
         let createdOrder = await OrderHelper(navigate).CreateOrder(createOrderObj)
         console.log("createdOrder",createdOrder)
-
+        if(createdOrder?.data){
             const res = await loadScript(
-              "https://checkout.razorpay.com/v1/checkout.js"
-            );
-        
-            if (!res) {
-              alert("Razorpay SDK failed to load. Are you online?");
-              return;
-            }
-        
-            const options = {
-                key: "rzp_test_zsqZSeSqO2fgTz", // Enter the Key ID generated from the Dashboard
-              amount: shippingStore?.orderTotal, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
-              currency: "INR",
-              order_id: createdOrder?.data?.orderId, 
-              
-              name: "HybaMart",
-              handler: function (response) {
-                // alert(response.razorpay_payment_id);
-                // alert(response.razorpay_order_id);
-                // alert(response.razorpay_signature);
-                console.log("response",response)
-                alert("Transaction successful");
-              },
-              prefill: {
-                name: "Rajat",
-                email: "rajat@rajat.com",
-                phone_number: "9899999999",
-              },
-            };
-            console.log("Options: ",options)
-            const paymentObject = new window.Razorpay(options);
-            paymentObject.open();
+                "https://checkout.razorpay.com/v1/checkout.js"
+              );
+          
+              if (!res) {
+                alert("Razorpay SDK failed to load. Are you online?");
+                return;
+              }
+          
+              const options = {
+                  key: "rzp_test_zsqZSeSqO2fgTz", // Enter the Key ID generated from the Dashboard
+                amount: shippingStore?.orderTotal, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+                currency: "INR",
+                order_id: createdOrder?.data?.orderId, 
+                
+                name: "HybaMart",
+                handler: function (response) {
+                  // alert(response.razorpay_payment_id);
+                  // alert(response.razorpay_order_id);
+                  // alert(response.razorpay_signature);
+                  console.log("response",response)
+                  alert("Transaction successful");
+                },
+                prefill: {
+                  name: "Rajat",
+                  email: "rajat@rajat.com",
+                  phone_number: "9899999999",
+                },
+              };
+              console.log("Options: ",options)
+              const paymentObject = new window.Razorpay(options);
+              paymentObject.open();
+        }
+
+           
           
     }
   

@@ -72,7 +72,7 @@ const Routes: IRoutesProps[] = [
                 ]
             },
             { path: 'banner', name: 'Banner', element: Banner, icon: 'Banner' },
-            { path: 'payment1', name: 'Payment', element: Payment, icon: 'Payment' },
+            { path: 'payment', name: 'Payment', element: Payment, icon: 'Payment' },
             { path: 'payment/:id', name: 'Edit Payment', element: EditPayment, icon: 'Payment' },
             { path: 'products/:id', name: 'Update Product', element: UpdateProducts, icon: 'Products' },
             { path: 'coupon', name: 'Coupon', element: Coupon, icon: 'Coupon' }

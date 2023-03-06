@@ -18,6 +18,7 @@ import BannerStore from "./BannerStore";
 import PaymentStore from "./PaymentStore";
 import CartStore from "./CartStore";
 import ShippingStore from "./ShippingStore";
+import OrderStore from "./OrderStore";
 
 
 class RootStore {
@@ -41,6 +42,8 @@ class RootStore {
     paymentStore: PaymentStore;
     cartStore : CartStore
     shippingStore: ShippingStore;
+    orderStore: OrderStore;
+
     constructor() {
         this.commonStore = new CommonStore();
         this.authStore = new AuthStore();
@@ -62,7 +65,7 @@ class RootStore {
         this.paymentStore = new PaymentStore();
         this.cartStore = new CartStore();
         this.shippingStore = new ShippingStore();
-
+        this.orderStore = new OrderStore();
     }
 }
 

@@ -5,7 +5,28 @@ import Endpoints from "../services/Endpoints";
 import SecureService from "../services/SecureService";
 
 const OrderHelper = (navigate: NavigateFunction) => {
-    let { shippingStore, shopStore } = RootStore;
+    let { shippingStore, shopStore , orderStore} = RootStore;
+
+    const GetOrder = async () => {
+        console.log(shopStore.storeDetails)
+        let params = `?storeId=${shopStore.storeDetails.id}&page=${orderStore.page}&size=${orderStore.size}`;
+
+        let resPaymentModes: any;
+        if (orderStore?.searchStr) {
+            params += `&name=${orderStore?.searchStr}`;
+        }
+        let resOrders: any;
+
+
+        resOrders = await SecureService(navigate).GetResponse(Endpoints.Order + params);
+
+        if (resOrders?.status === 'OK') {
+            orderStore.orders = resOrders?.data;
+            orderStore.page = 0;
+            orderStore.totalItems = resOrders?.totalItems;
+            
+        }
+    }
 
     const CreateOrder = async (Obj:any) => {
         let resCreateOrder: any;
@@ -25,7 +46,7 @@ const OrderHelper = (navigate: NavigateFunction) => {
 
  
 
-    return {  CreateOrder };
+    return { GetOrder, CreateOrder };
 }
 
 export default OrderHelper;

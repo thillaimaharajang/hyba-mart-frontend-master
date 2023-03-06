@@ -28,8 +28,9 @@ const ProductCheckout = (props) => {
     let navigate = useNavigate();
 
     const getDetails = async () => {
+        console.log(shopStore)
         await CartHelper(navigate).GetCart();
-        await ShopHelper(navigate).GetShopDetailsByName('tandulkar-15');
+        await ShopHelper(navigate).GetShopDetailsByName(shopStore?.storeDetails?.storeUrl);
         await PaymentModeHelper(navigate).GetPaymentModes();
 
     }
