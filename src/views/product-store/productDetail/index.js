@@ -16,6 +16,7 @@ import { useNavigate,useParams } from "react-router-dom";
 import RootStore from "../../../mobx-store/RootStore";
 import ProductHelper from "../../../helpers/ProductHelper";
 import ShopHelper from "../../../helpers/ShopHelper";
+import { observer } from 'mobx-react-lite';
 
 const ProductDetail = (props) => {   
     const navigate = useNavigate(); 
@@ -23,7 +24,6 @@ const ProductDetail = (props) => {
     let { id } = useParams();
 
     useEffect(() => {
-        console.log("Getting product details")
       getProductDetails();
     }, []);
     
@@ -33,6 +33,7 @@ const ProductDetail = (props) => {
       if(productStore.products[0].id){
         console.log("Product Id available");
         await ShopHelper(navigate).GetShopDetailsByName(productStore.products[0].storeId);
+
 
       }else{
         navigate('/main-dashboard', { replace: true });
@@ -110,4 +111,4 @@ const ProductDetail = (props) => {
   )
 }
 
-export default ProductDetail
+export default observer(ProductDetail)

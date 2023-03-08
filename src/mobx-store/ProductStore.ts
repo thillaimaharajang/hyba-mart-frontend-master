@@ -111,6 +111,7 @@ export default class ProductStore {
         if (!this.description?.getCurrentContent()?.hasText()) {
             this.formCreateProductErrors.description = Messages.EmptyProductDescription;
         } else if (this.description?.getCurrentContent()?.getPlainText()?.length > 80) {
+            console.log(this.description?.getCurrentContent()?.getPlainText()?.length)
             this.formCreateProductErrors.description = Messages.InvalidDescription;
         }
 

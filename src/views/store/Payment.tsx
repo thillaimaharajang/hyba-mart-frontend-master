@@ -1,5 +1,5 @@
-
-import { Button, Tooltip,Switch} from "antd";
+import { Tooltip,Switch} from "antd";
+import {Button } from '@mui/material';
 import PageTransition from "../../components/PageTransition";
 import SubHeader from "../../components/SubHeader";
 import RootStore from "../../mobx-store/RootStore";
@@ -12,6 +12,11 @@ import { ITableColumn } from "../../interface/IComponent";
 import { observer } from "mobx-react-lite";
 import { Icons } from "../../constant/Icons";
 import AddProductCategory from "./PaymentSetting";
+import Whatsapp from '../../assets/images/whatsappPay.svg';
+import Paypal from '../../assets/images/paypal.svg';
+import Razorpay from '../../assets/images/razorPay.svg';
+import Stripe from '../../assets/images/stripe.svg';
+import COD from '../../assets/images/cod.svg';
 
 
 const Payment: React.FC = () => {
@@ -20,18 +25,32 @@ const Payment: React.FC = () => {
     let [isCategoryAddModal, toggleAddModal] = useState(false);
     const [isCategoryUpdateModal, toggleUpdateModal] = useState(false);
     
+    console.log(paymentStore, 'paymentStorepaymentStore')
     const columns: ITableColumn[] = [
         {
             key: "name",
             title: "Name",
             width: '20%',
-            // isTrim: true,
-            // render: (name: string) => (
-            //             <Tooltip placement="topLeft" title='Edit' arrowPointAtCenter>
-            //                 <>{console.log("Name: ",name)}</>
-            //                 <img src={Icons.WhatsappLogo} alt='ellipsis-vertical' style={{ height: '25px', cursor: 'pointer' }}/>
-            //             </Tooltip>
-            //         ),
+            isTrim: true,
+            render: (name: string) => (
+                        <Tooltip placement="topLeft" title='Edit' arrowPointAtCenter>
+                            {name === "Whatsapp" && (
+                                <img src={Whatsapp} alt='ellipsis-vertical' style={{ height: '45px', cursor: 'pointer' }}/>
+                            )}
+                            {name === "Paypal" && (
+                                <img src={Paypal} alt='ellipsis-vertical' style={{ height: '45px', cursor: 'pointer' }}/>
+                            )}
+                            {name === "Razorpay" && (
+                                <img src={Razorpay} alt='ellipsis-vertical' style={{ height: '25px', cursor: 'pointer' }}/>
+                            )}
+                             {name === "Stripe" && (
+                                <img src={Stripe} alt='ellipsis-vertical' style={{ height: '25px', cursor: 'pointer' }}/>
+                            )}
+                            {name === "Cash on Delivery" && (
+                                <img src={COD} alt='ellipsis-vertical' style={{ height: '25px', cursor: 'pointer' }}/>
+                            )}
+                        </Tooltip>
+                    ),
         },
         {
             key: "about",
@@ -57,10 +76,7 @@ const Payment: React.FC = () => {
             width: '20%',
             align: 'center',
             render: (id: any) => (
-                <Button className='setting-btn' htmlType='submit' type="primary" 
-                onClick={()=>navigateToEditPayment(id)}
-
-                block>Settings</Button>
+                <Button variant="contained" style={{marginTop:15, textTransform: 'capitalize', backgroundColor:'#E94A3C'}} onClick={()=>navigateToEditPayment(id)}>Settings</Button>
             ),
         }
     ]

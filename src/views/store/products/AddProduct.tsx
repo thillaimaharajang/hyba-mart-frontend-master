@@ -79,6 +79,7 @@ const AddProductCategories: React.FC<IAddPrductCategoryProps> = (props) => {
     }
 
     const onRichTextChangeValue = (value: EditorState) => {
+        console.log("ValueChanges",value)
         productStore.description = value;
 
         if (!isValidForm) {

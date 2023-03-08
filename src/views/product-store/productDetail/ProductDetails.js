@@ -19,8 +19,8 @@ const ProductDetails = (props) => {
 
     const productDetail = productStore.products[0];
     console.log("ProductDetails:",productDetail)
-    const gallery = productDetail.galleryImage ? productDetail.galleryImage : [];
-    const productImage = productDetail.mainImage ? Function.loadImagePath(productDetail.mainImage) : Premium
+    const gallery = productDetail?.galleryImage ? productDetail?.galleryImage : [];
+    const productImage = productDetail?.mainImage ? Function.loadImagePath(productDetail?.mainImage) : Premium
    
     const addProducttoCart = async(id) => {
         let getMsg = null;
@@ -40,11 +40,12 @@ const ProductDetails = (props) => {
 
     return (
     <Container style={{background: 'white', boxShadow: '0px 0px 25px 10px #F6F4FD'}}>
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"></link>
         <Grid container>
             <Grid item xs={2}>
                 {
                     gallery.map((image)=>{
-                        return <div><img alt="complex" src={Function.loadImagePath(image.productImage)} width="100px"/></div>
+                        return <div key={image.id.toString()}><img alt="complex" src={Function.loadImagePath(image.productImage)} width="100px"/></div>
                     })
                 }
 
@@ -54,22 +55,23 @@ const ProductDetails = (props) => {
             </Grid>
             <Grid item xs={6} style={{marginTop: 30}}>
                 <Typography gutterBottom variant="h4" component="div">
-                { productDetail.name }
+                { productDetail?.name }
                 </Typography>
                 <Typography variant="caption" gutterBottom component="div" style={{marginBottom: 10}}>
                     <StarIcon fontSize='small' className='rating-yellow' /> <StarIcon className='rating-yellow' fontSize='small'/><StarIcon className='rating-yellow' fontSize='small' /><StarIcon className='rating-yellow' fontSize='small' /><StarIcon className='rating-yellow' fontSize='small' /> (22)
                 </Typography>
                 <Typography variant="caption" gutterBottom component="div" style={{marginBottom: 10}}>
-                    <b>{ productDetail.regularPrice } <span>{ productDetail.offerPrice }</span></b>
+                    <b ><span style={{textDecorationLine: 'line-through', textDecorationStyle: 'solid'}}><i className="fa fa-inr"></i>{ productDetail?.regularPrice }</span> 
+                    <span> <i className="fa fa-inr"></i>{ productDetail?.offerPrice }</span></b>
                 </Typography>
                 <Typography variant="caption" gutterBottom component="div" style={{marginBottom: 10}}>
                     <b>Color</b>
                 </Typography>
                 <Typography variant="caption" gutterBottom color="#A9ACC6" component="div" style={{marginBottom: 10}}>
-                    { productDetail.description }
+                        <div dangerouslySetInnerHTML={{ __html: productDetail?.description}} />
                 </Typography>
                 <Typography variant="caption" gutterBottom component="div" style={{marginBottom: 10}}>
-                    <b>Add To Cart</b> <FavoriteBorderIcon onClick={()=>{addProducttoCart(productDetail.id)}} style={{marginLeft: 20}} fontSize='small'/>
+                    <b>Add To Cart</b> <FavoriteBorderIcon onClick={()=>{addProducttoCart(productDetail?.id)}} style={{marginLeft: 20}} fontSize='small'/>
                 </Typography>
                 <Typography variant="caption" gutterBottom component="div" style={{marginBottom: 10}}>
                     <b>Categories:</b>

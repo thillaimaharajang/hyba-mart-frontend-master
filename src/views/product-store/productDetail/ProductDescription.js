@@ -4,9 +4,14 @@ import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import { observer } from 'mobx-react-lite';
+import RootStore from '../../../mobx-store/RootStore';
 
 const ProductDescription = (props) => {
     const [value, setValue] = useState('1');
+    let { productStore } = RootStore;
+    const productDescription = productStore?.products[0]?.description.replace("n","").replace("\",");
+    console.log(productDescription)
 
     const handleChange = (event, newValue) => {
       setValue(newValue);
@@ -23,7 +28,8 @@ const ProductDescription = (props) => {
               <Tab label="Video" value="4" />
             </TabList>
           </Box>
-          <TabPanel value="1">
+          <TabPanel value="1"><div dangerouslySetInnerHTML={{ __html: productDescription}} /></TabPanel>
+          {/* <TabPanel value="1">
                 <Typography gutterBottom variant="subtitle2" component="div" color="#000">
                     <b>Varius tempor.</b>
                 </Typography>
@@ -40,7 +46,7 @@ const ProductDescription = (props) => {
                     <ListItem style={{fontSize: 13, paddingLeft: 0, color: '#A9ACC6'}}><ArrowForwardIcon className='desc-icon' /> Aliquam dis vulputate vulputate integer sagittis. Faucibus ds diam arcu, nulla lobortis justo netus dis. Eu in fringilla vulputate nunc nec. Dui, massa viverr .</ListItem>
                     <ListItem style={{fontSize: 13, paddingLeft: 0, color: '#A9ACC6'}}><ArrowForwardIcon className='desc-icon' /> Aliquam dis vulputate vulputate integer sagittis. Faucibus ds diam arcu, nulla lobortis justo netus dis. Eu in fringilla vulputate nunc nec. Dui, massa viverr .</ListItem>
                 </List>
-          </TabPanel>
+          </TabPanel> */}
           {/* <TabPanel value="2">Item Two</TabPanel>
           <TabPanel value="3">Item Three</TabPanel>
           <TabPanel value="4">Item Three</TabPanel> */}
@@ -50,4 +56,4 @@ const ProductDescription = (props) => {
    )
  }
  
- export default ProductDescription
+ export default observer(ProductDescription)

@@ -22,6 +22,7 @@ import Function from "../../../utils/Function"
 import ProductHelper from "../../../helpers/ProductHelper";
 import LocalStorage from '../../../storage/LocalStorage';
 import { message } from "antd";
+import { observer } from "mobx-react-lite";
 
 const Advertisement = (props) => {
   const [showDropdown, setShowDropdown] = useState(false)
@@ -185,4 +186,4 @@ const Advertisement = (props) => {
   )
 }
 
-export default Advertisement
+export default observer(Advertisement)

@@ -11,14 +11,15 @@ const OrderHelper = (navigate: NavigateFunction) => {
         console.log(shopStore.storeDetails)
         let params = `?storeId=${shopStore.storeDetails.id}&page=${orderStore.page}&size=${orderStore.size}`;
 
-        let resPaymentModes: any;
         if (orderStore?.searchStr) {
             params += `&name=${orderStore?.searchStr}`;
         }
         let resOrders: any;
 
+        orderStore.isLoading = true;
 
         resOrders = await SecureService(navigate).GetResponse(Endpoints.Order + params);
+        orderStore.isLoading = false;
 
         if (resOrders?.status === 'OK') {
             orderStore.orders = resOrders?.data;
@@ -32,9 +33,9 @@ const OrderHelper = (navigate: NavigateFunction) => {
         let resCreateOrder: any;
         
 
-        shippingStore.isLoading = true;
+        orderStore.isLoading = true;
         resCreateOrder = await SecureService(navigate).PostResponse(Endpoints.Order, 'POST', Obj);
-        shippingStore.isLoading = false;
+        orderStore.isLoading = false;
 
         if (resCreateOrder?.status === 'CREATED') {
             message.success(resCreateOrder?.message, 5);

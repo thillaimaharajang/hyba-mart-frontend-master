@@ -61,30 +61,30 @@ const SecondHeader = (props) => {
             </Grid>
             <Grid item xs={6} className='flexEnd'>
                 <Select labelId="label" id="selectLanguage" value={language} className='dropdown-border' onChange={handleLangChange} MenuProps={{ style: { maxWidth: 250, maxHeight: 300, position: 'absolute' }, disableScrollLock: true }}>
-                    <MenuItem value={language} tabIndex="0" style={{ display: 'none' }}>
+                    <MenuItem value={language} tabIndex={Number("0")} style={{ display: 'none' }}>
                     <span className="cursor-pointer  flexCenter">
                         <div className="drop-label" style={{ color: '#002a57' }}>English</div>
                     </span>
                     </MenuItem>
-                    <MenuItem value={1} tabIndex="-2" className="dropdown-menu-item">
+                    <MenuItem value={1} tabIndex={Number("-2")} className="dropdown-menu-item">
                         Spanish
                     </MenuItem>
                     <Divider />
-                    <MenuItem value={2} tabIndex="-1" className="dropdown-menu-item">
+                    <MenuItem value={2} tabIndex={Number("-1")} className="dropdown-menu-item">
                         Chinese
                     </MenuItem>
                 </Select>
                 <Select labelId="label" id="usd" value={usd} className='dropdown-border' onChange={handleUsdChange} MenuProps={{ style: { maxWidth: 250, maxHeight: 300, position: 'absolute' }, disableScrollLock: true }}>
-                    <MenuItem value={usd} tabIndex="0" style={{ display: 'none' }}>
+                    <MenuItem value={usd} tabIndex={Number("0")} style={{ display: 'none' }}>
                     <span className="cursor-pointer flexCenter">
                         <div className="drop-label" style={{ color: '#002a57' }}>USD</div>
                     </span>
                     </MenuItem>
-                    <MenuItem value={1} tabIndex="-2" className="dropdown-menu-item">
+                    <MenuItem value={1} tabIndex={Number("-2")} className="dropdown-menu-item">
                         123
                     </MenuItem>
                     <Divider />
-                    <MenuItem value={2} tabIndex="-1" className="dropdown-menu-item">
+                    <MenuItem value={2} tabIndex={Number("-1")} className="dropdown-menu-item">
                         456
                     </MenuItem>
                 </Select>
@@ -94,7 +94,7 @@ const SecondHeader = (props) => {
                 <Typography gutterBottom variant="caption" component="span" color="#fff" className='cursor-pointer' style={{marginRight: 20}} onClick={getCartItems}>
                    Wishlist <FavoriteBorderIcon sx={{ fontSize: "15px" }} />
                 </Typography>
-                <Typography gutterBottom component="span" color="#fff" className='cursor-pointer'>
+                <Typography gutterBottom component="span" color="#fff" className='cursor-pointer' onClick={getCartItems}>
                     <img src={CartIcon} width="16px" />
                 </Typography>
             </Grid>

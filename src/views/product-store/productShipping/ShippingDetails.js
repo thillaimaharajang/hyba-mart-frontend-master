@@ -13,6 +13,7 @@ import RootStore from "../../../mobx-store/RootStore";
 import { useNavigate } from "react-router-dom";
 import Function from "../../../utils/Function"
 import OrderHelper from "../../../helpers/OrderHelper";
+import { observer } from "mobx-react-lite";
 
 const ShippingDetails = (props) => {
     const [value, setValue] = useState('');
@@ -113,11 +114,9 @@ const ShippingDetails = (props) => {
                 
                 name: "HybaMart",
                 handler: function (response) {
-                  // alert(response.razorpay_payment_id);
-                  // alert(response.razorpay_order_id);
-                  // alert(response.razorpay_signature);
+                  
                   console.log("response",response)
-                  alert("Transaction successful");
+                  navigate('/order-completion', { replace: true });
                 },
                 prefill: {
                   name: "Rajat",
@@ -253,44 +252,7 @@ const ShippingDetails = (props) => {
                             After clicking “Complete order” , you will be redirected to payment page to complete your purchase securely.
                         </Typography>
                     </div>
-                    
-                    <div className='same-box' style={{paddingTop: 15, paddingBottom: 10}}>
-                    <FormControlLabel value="razor" control={<Radio />} label={
-                        <Grid item xs={12} container>
-                        <Grid item xs={5}>
-                        <Typography gutterBottom variant="subtitle2" component="div" color="#000000" style={{marginTop: 10}}>
-                            Razorpay (card, UPI, NetBanking, Wallets)
-                        </Typography>
-                        </Grid>
-                        <Grid item xs={7}>
-                           <CardsImgs />
-                        </Grid>
-                    </Grid>
-                    } />
-                    <FormControlLabel value="paytm" control={<Radio />} label={
-                        <Grid item xs={12} container>
-                        <Grid item xs={5}>
-                            <img alt="complex" src={PaytmIcon} width="auto" height="20px" style={{marginTop: 5}}/>
-                        </Grid>
-                        <Grid item xs={7}>
-                           <CardsImgs />
-                        </Grid>
-                    </Grid>
-                    } />
-                    <FormControlLabel value="gpay" control={<Radio />} label={
-                        <Grid item xs={12} container>
-                        <Grid item xs={5}>
-                        <Typography gutterBottom variant="subtitle2" component="div" color="#000000" style={{marginTop: 10}}>
-                            Google Pay
-                        </Typography>
-                        </Grid>
-                        <Grid item xs={7}>
-                           <CardsImgs />
-                        </Grid>
-                    </Grid>
-                    } />
-                    </div>
-                    </RadioGroup>
+                 </RadioGroup>
                 </FormControl>
 
             </Grid>
@@ -353,4 +315,4 @@ const ShippingDetails = (props) => {
    )
  }
  
- export default ShippingDetails
+ export default observer(ShippingDetails)

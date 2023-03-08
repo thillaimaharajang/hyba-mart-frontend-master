@@ -16,7 +16,7 @@ import Function from "../../utils/Function";
 
 const Orders: React.FC = () => {
     const navigate = useNavigate();
-    const { productStore, productCategory, orderStore } = RootStore;
+    const { productCategory, orderStore } = RootStore;
     const columns: ITableColumn[] = [
         {
             key: "",
@@ -24,15 +24,20 @@ const Orders: React.FC = () => {
             width: '6%'
         },
         {
-            key: "mainImage",
-            title: "Media",
-            width: '8%',
-            render: (mainImage: string) => (
-                <div>
-                    <img src={Function.loadImagePath(mainImage)} alt='product-image' style={{ height: '2rem' }} />
-                </div>
-            )
+            key: "orderId",
+            title: "Id",
+            width: '20%'
         },
+        // {
+        //     key: "mainImage",
+        //     title: "Name",
+        //     width: '8%',
+        //     render: (mainImage: string) => (
+        //         <div>
+        //             <img src={Function.loadImagePath(mainImage)} alt='product-image' style={{ height: '2rem' }} />
+        //         </div>
+        //     )
+        // },
         {
             key: "name",
             title: "Name",
@@ -40,28 +45,34 @@ const Orders: React.FC = () => {
             isTrim: true
         },
         {
-            key: "offerPrice",
+            key: "address",
+            title: "Address",
+            width: '23%',
+            isTrim: true
+        },
+        {
+            key: "price",
             title: "Price",
             width: '14%'
         },
         {
-            key: "sku",
-            title: "SKU",
+            key: "paymentStatus",
+            title: "Payment",
             width: '13%'
         },
         {
             key: "quantity",
-            title: "Stock",
+            title: "Payment Via",
             width: '13%'
         },
         {
-            key: "status",
+            key: "orderStatus",
             title: "Status",
             width: '11%',
             render: (status: any) => (
                 <div className='d-flex align-items-center'>
                     <div className={`custom-dot ${status ? 'active-dot' : 'inactive-dot'}`} />
-                    <div style={{ color: status ? '#46BE82' : '#F6C451' }}>{status ? 'Active' : 'Inactive'}</div>
+                    <div style={{ color: status ? '#46BE82' : '#F6C451' }}>{status ? status : ''}</div>
                 </div>
             )
         }
@@ -74,13 +85,13 @@ const Orders: React.FC = () => {
 
     const getOrders = async () => {
         await OrderHelper(navigate).GetOrder();
-        console.log(orderStore)
+        console.log(orderStore?.orders, '---------------')
     }
 
     const onSubmitProductSearch = async (searchStr: string = '') => {
-        if (productStore?.searchStr) {
+        if (orderStore?.searchStr) {
             if (searchStr === '') {
-                productStore.searchStr = '';
+                orderStore.searchStr = '';
             }
         }
     }
@@ -91,7 +102,6 @@ const Orders: React.FC = () => {
     }
 
     const onChangeSelectValue = async (value: any) => {
-        productStore.filterProductCategoryId = value;
         await getOrders();
     }
 
@@ -102,20 +112,19 @@ const Orders: React.FC = () => {
     return <PageTransition>
         <div>
             <SubHeader
-                title="Product:" count={7} addBtn addBtnText='Add Products'
-                dropdown dropdownText='Category' search filterBtn
-                onAddClick={navigateToAddProduct} searchStr={productStore?.searchStr}
+                title="Orders:" count={7} 
+                search filterBtn
+                onAddClick={navigateToAddProduct} searchStr={orderStore?.searchStr}
                 onSubmitSearch={onSubmitProductSearch}
-                dropdownList={productCategory.productCategories} dropdownValue={productStore?.filterProductCategoryId}
                 onChangeDropdown={onChangeSelectValue} onClickDropdown={onClickSelectValue}
             />
             <CustomTable columns={columns} datas={orderStore?.orders}
-                defaultPaginationCurrent={1} paginationCurrent={productStore?.page}
-                paginationTotal={productStore?.totalItems}
-                isLoading={productStore?.isLoading} />
-            <Loader visibility={productStore?.isLoading} />
+                defaultPaginationCurrent={1} paginationCurrent={orderStore?.page}
+                paginationTotal={orderStore?.totalItems}
+                isLoading={orderStore?.isLoading} />
+            <Loader visibility={orderStore?.isLoading} />
         </div>
     </PageTransition>
 }
 
-export default Orders;
+export default observer(Orders);

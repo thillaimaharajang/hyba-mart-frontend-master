@@ -51,7 +51,6 @@ const ProductHelper = (navigate: NavigateFunction) => {
     
     const GetProductsbyId = async (id:string) => {
         let resProducts: any;
-        console.log(id)
         productStore.isLoading = true;
         resProducts = await HttpClient(navigate).GetResponse(Endpoints.Product +'/'+ id);
         console.log("resProducts",resProducts)

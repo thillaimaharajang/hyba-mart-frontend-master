@@ -3,8 +3,10 @@ import {Grid, Typography, Container, OutlinedInput, Button, Link } from '@mui/ma
 import OrderCompletionIcon from '../../assets/images/order-completion.svg';
 import ClockIcon from '../../assets/images/clock.svg';
 import NotepadIcon from '../../assets/images/notepad.svg';
+import LocalStorage from '../../storage/LocalStorage';
 
 const OrderStatus = (props) => {
+    let storeUrl = LocalStorage.get('storeUrl')
     return (
     <Container>
         <Grid container>
@@ -20,7 +22,7 @@ const OrderStatus = (props) => {
                         Thank you for your order! Your order is being processed and will be completed within 3-6
                         hours. You will receive an email confirmation when your order is completed.
                     </Typography>
-                    <Button variant="contained" className='pinkBtn' style={{marginTop:15, marginBottom: 20}}>Continue Shopping</Button>
+                    <Button variant="contained" href={storeUrl} className='pinkBtn' style={{marginTop:15, marginBottom: 20}}>Continue Shopping</Button>
                 </Grid>
             </Grid>
         </Grid>

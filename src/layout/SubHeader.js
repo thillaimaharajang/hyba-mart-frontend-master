@@ -30,7 +30,7 @@ const SubHeader = (props) => {
                    <a href={storeUrl}>Home</a>
                 </Typography>
                 <Select labelId="label" id="selectLanguage" value="Category" style={{top: '-3px'}} className='dropdown-border dropdown-icon' onChange={handleLangChange} MenuProps={{ style: { maxWidth: '100%', maxHeight: 300, position: 'absolute', color: '#FB2E86' }, disableScrollLock: true }}>
-                    <MenuItem value="Category" tabIndex="0" style={{ display: 'none' }}>
+                    <MenuItem value="Category" tabIndex={Number("0")} style={{ display: 'none' }}>
                     <span className="cursor-pointer  flexCenter">
                         <div className="drop-label-black">Category</div>
                     </span>

@@ -20,6 +20,12 @@ const CartDetails = (props) => {
     const navigateToShipping = async() =>{
         navigate('/product-shipping');
     }
+    const setCountObj = async(count,index) => {
+        setCount(count);
+        cartStore.products[index].quantity = cartStore.products[index].quantity+count;
+        cartStore.products[index].total = cartStore.products[index].quantity * cartStore.products[index].productPrice;
+
+    }
 
     return (
     <Container style={{background: 'white', boxShadow: '0px 0px 25px 10px #F6F4FD'}}>
@@ -47,9 +53,9 @@ const CartDetails = (props) => {
                                     <td><Typography gutterBottom variant="caption" component="div" color="#000">{product.productPrice}</Typography></td>
                                     <td>
                                         <ButtonGroup size="small" aria-label="small button group">
-                                            <Button key="one" onClick={()=> setCount(count-1)}>-</Button>
+                                            <Button key="one" onClick={()=> setCountObj(-1,data.indexOf(product))}>-</Button>
                                             <Button key="two">{product.quantity}</Button>
-                                            <Button key="three" onClick={()=> setCount(count+1)}>+</Button>
+                                            <Button key="three" onClick={()=> setCountObj(+1,data.indexOf(product))}>+</Button>
                                         </ButtonGroup>
                                     </td>
                                     <td><Typography gutterBottom variant="caption" component="div" color="#000">{product.total}</Typography></td>

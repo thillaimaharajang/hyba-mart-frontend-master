@@ -34,7 +34,7 @@ const Dashboard: React.FC = () => {
                     <b>Your store will be live at</b>
                 </Typography>
                 <Typography gutterBottom variant="subtitle1" component="div" color="#304FFE">
-                    <Link href={shopStore?.storeUrl} underline="hover"><b>da{shopStore?.storeUrl}</b></Link>
+                    <Link href={shopStore?.storeUrl} underline="hover"><b>{shopStore?.storeUrl}</b></Link>
                 </Typography>
                 </div>
                 <div>
