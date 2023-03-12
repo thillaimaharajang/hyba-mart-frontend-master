@@ -47,7 +47,7 @@ const Products: React.FC = () => {
             width: '14%'
         },
         {
-            key: "sku",
+            key: "id",
             title: "SKU",
             width: '13%'
         },
@@ -86,12 +86,12 @@ const Products: React.FC = () => {
             align: 'center',
             render: (id: any) => (
                 <Tooltip placement="topLeft" title='Delete' arrowPointAtCenter>
-                    <img src={Icons.Delete} alt='ellipsis-vertical' style={{ height: '25px', cursor: 'pointer' }}
+                        <img src={Icons.Delete} alt='ellipsis-vertical' style={{ height: '25px', cursor: 'pointer' }}
                         onClick={() => showDelteConfirm(id)} />
                 </Tooltip>
             ),
         }
-    ];
+    ];  
 
     useEffect(() => {
         getProducts();
@@ -119,7 +119,8 @@ const Products: React.FC = () => {
         }
     }
 
-    const onToggleUpdate = (id: any) => {
+    const onToggleUpdate = async (id: any) => {
+        await ProductHelper(navigate).GetProductsbyId(id)
         productStore.setProductValues(id);
         navigate(id?.toString());
     }

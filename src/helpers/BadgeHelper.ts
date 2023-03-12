@@ -41,6 +41,9 @@ const BadgeHelper = (navigate: NavigateFunction) => {
         if (resCreatebadgeStore?.status === 'CREATED') {
             message.success(resCreatebadgeStore?.message, 5);
             await GetBadges();
+            return true;
+        }else{
+            return false;
         }
     }
 
@@ -50,9 +53,8 @@ const BadgeHelper = (navigate: NavigateFunction) => {
         badgeFormData.append('id', badgeStore?.id);
         badgeFormData.append('name', badgeStore?.name);
         badgeFormData.append('badgeImage', badgeStore?.image);
-        badgeFormData.append('status', badgeStore?.status)
-        badgeFormData.append('storeId', shopStore?.id)
-
+        badgeFormData.append('status', badgeStore?.status);
+        badgeFormData.append('storeId', shopStore?.id);
         badgeStore.isLoading = true;
         resUpdateBadge = await SecureService(navigate).PostResponse(Endpoints.Badge, 'PUT', badgeFormData, true);
         badgeStore.isLoading = false;
@@ -60,6 +62,9 @@ const BadgeHelper = (navigate: NavigateFunction) => {
         if (resUpdateBadge?.status === 'OK') {
             message.success(resUpdateBadge?.message, 5);
             await GetBadges();
+            return true;
+        }else{
+            return false;
         }
     }
 
@@ -76,6 +81,9 @@ const BadgeHelper = (navigate: NavigateFunction) => {
         if (resDeleteBadge?.status === 'OK') {
             message.success(resDeleteBadge?.message, 5);
             await GetBadges();
+            return true;
+        }else{
+            return false;
         }
     }
 

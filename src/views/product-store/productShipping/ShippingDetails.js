@@ -17,31 +17,22 @@ import { observer } from "mobx-react-lite";
 
 const ShippingDetails = (props) => {
     const [value, setValue] = useState('');
-    let { paymentStore, cartStore ,shippingStore,shopStore,authStore } = RootStore;
-
-   console.log("paymentStore",paymentStore)
-   
+    let { paymentStore, cartStore ,shippingStore,shopStore,authStore } = RootStore;  
+    
     const handleRadioChange = (event) => {
-        console.log("event.target",event.target)
         setValue(event.target.value);
         shippingStore.paymentId = event.target.value;
         shippingStore.paymentModeId = event.target.name;
-
       };
-
-    console.log(cartStore)
 
     let navigate = useNavigate();
     let data = cartStore.products;
     const total = data.reduce((total, num) => {
         return total + Number(num.total);
       }, 0)
-      console.log("total",total)
       shippingStore.orderTotal=total
 
     let paymentModes = paymentStore.paymentModes;
-    console.log("paymentModes",paymentModes)
-
 
     const onChangeValue = (event) => {
         event.preventDefault();
@@ -63,7 +54,6 @@ const ShippingDetails = (props) => {
         }else if (id === 'mobile') {
             shippingStore.mobile = value;
         }
-        console.log(shippingStore)
     }
 
     function loadScript(src) {
@@ -92,10 +82,8 @@ const ShippingDetails = (props) => {
 
             // storeId: shopStore?.id
         }
-        console.log("createOrderObj",createOrderObj)
 
         let createdOrder = await OrderHelper(navigate).CreateOrder(createOrderObj)
-        console.log("createdOrder",createdOrder)
         if(createdOrder?.data){
             const res = await loadScript(
                 "https://checkout.razorpay.com/v1/checkout.js"
@@ -224,7 +212,6 @@ const ShippingDetails = (props) => {
                     onChange={handleRadioChange}
                     >
                     <div className='same-box'>
-                    {console.log("paymentModes INSIDE",paymentModes)}
                     {paymentModes.map((mode)=>{
                         if(mode.isEnabled){
                             return <FormControlLabel key={mode.id} name={mode.paymentModeId.toString()} value={mode.id} control={<Radio />} 

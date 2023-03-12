@@ -17,6 +17,7 @@ export default class PaymentModeStore {
     @observable webHookUrl: string | undefined = '';
     @observable paymentModeId: number | undefined = 0;
     @observable isEnabled: boolean | undefined = false;
+    @observable isConfigurable: boolean | undefined = false;
     @observable isLoading: boolean = false;
     @observable formCreatePaymentModeErrors: any = {};
 
@@ -34,16 +35,15 @@ export default class PaymentModeStore {
         this.isLoading = false;
     }
 
-    // @action setBadgeValues = (id: any) => {
-    //     const selectedBadge = this.badges.find((badge) => badge.id === id);
+    @action setPaymentValue = (obj: any) => {
+        this.id = obj?.id;
+        this.isEnabled = obj?.isEnabled;
+        this.publishKey = obj?.publishKey;
+        this.secretKey = obj?.secretKey;
+        this.webHookUrl =obj?.webHookUrl;
+    }
 
-    //     this.id = selectedBadge?.id;
-    //     this.name = selectedBadge?.name;
-    //     this.image = selectedBadge?.badgeImage;
-    //     this.status = selectedBadge?.status;
-    //     this.formCreateBadgeErrors = {};
-    // }
-
+   
     // @action isValidCreateBadgeForm() {
     //     this.formCreateBadgeErrors = {};
 

@@ -124,9 +124,11 @@ const Badges: React.FC = () => {
         }
         if (badgeStore?.isValidCreateBadgeForm()) {
             isValidForm = true;
-            toggleAddModal(!isBadgeAddModal);
-            await BadgeHelper(navigate).CreateBadge();
-            badgeStore?.resetPostData();
+            let created = await BadgeHelper(navigate).CreateBadge();
+            if(created){
+                toggleAddModal(!isBadgeAddModal);
+                badgeStore?.resetPostData();
+            }
         } else {
             isValidForm = false;
         }
@@ -167,9 +169,12 @@ const Badges: React.FC = () => {
         event.preventDefault()
         if (badgeStore?.isValidCreateBadgeForm()) {
             isValidForm = true;
-            toggleUpdateModal(!isBadgeUpdateModal);
-            await BadgeHelper(navigate).UpdateBadge();
-            badgeStore?.resetPostData();
+
+            let updated = await BadgeHelper(navigate).UpdateBadge();
+            if(updated){
+                toggleUpdateModal(!isBadgeUpdateModal);
+                badgeStore?.resetPostData();
+            }
         } else {
             isValidForm = false;
         }

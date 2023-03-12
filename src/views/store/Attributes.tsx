@@ -93,9 +93,11 @@ const Attributes: React.FC = () => {
         }
         if (attributesStore?.isValidCreateAttributeForm()) {
             isValidForm = true;
-            toggleAddModal(!isAttributeAddModal);
-            await AttributesHelper(navigate).CreateAttribute();
-            attributesStore?.resetPostData();
+            let created = await AttributesHelper(navigate).CreateAttribute();
+            if(created){
+                toggleAddModal(!isAttributeAddModal);
+                attributesStore?.resetPostData();
+            }           
         } else {
             isValidForm = false;
         }
@@ -127,9 +129,11 @@ const Attributes: React.FC = () => {
         event.preventDefault()
         if (attributesStore?.isValidCreateAttributeForm()) {
             isValidForm = true;
-            toggleUpdateModal(!isAttributeUpdateModal);
-            await AttributesHelper(navigate).UpdateAttribute();
-            attributesStore?.resetPostData();
+            let updated = await AttributesHelper(navigate).UpdateAttribute();
+            if(updated){
+                toggleUpdateModal(!isAttributeUpdateModal);
+                attributesStore?.resetPostData();
+            }
         } else {
             isValidForm = false;
         }

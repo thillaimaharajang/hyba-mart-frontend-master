@@ -26,6 +26,21 @@ const AttributesHelper = (navigate: NavigateFunction) => {
         }
     }
 
+    const GetAttributesofProduct = async (id:number) => {
+        let resAttributes: any;
+        let params = `?productId=${id}&storeId=${shopStore.id}`;      
+        attributesStore.isLoading = true;
+        resAttributes = await SecureService(navigate).GetResponse(Endpoints.Attributes + params);
+        attributesStore.isLoading = false;
+
+        if (resAttributes?.status === 'OK') {
+            attributesStore.attributes = resAttributes?.data;
+            attributesStore.page = resAttributes?.currentPage;
+            attributesStore.totalItems = resAttributes?.totalItems;
+        }
+    }
+
+
     const CreateAttribute = async () => {
         let resCreateAttribute: any;
         let attributeCreateObj = {
@@ -40,6 +55,9 @@ const AttributesHelper = (navigate: NavigateFunction) => {
         if (resCreateAttribute?.status === 'CREATED') {
             message.success(resCreateAttribute?.message, 5);
             await GetAttributes();
+            return true;
+        }else{
+            return false;
         }
     }
 
@@ -58,6 +76,9 @@ const AttributesHelper = (navigate: NavigateFunction) => {
         if (resUpdateAttribute?.status === 'OK') {
             message.success(resUpdateAttribute?.message, 5);
             await GetAttributes();
+            return true;
+        }else{
+            return false;
         }
     }
 
@@ -77,7 +98,7 @@ const AttributesHelper = (navigate: NavigateFunction) => {
         }
     }
 
-    return { GetAttributes, CreateAttribute, UpdateAttribute, DeleteAttribute };
+    return { GetAttributes, CreateAttribute, UpdateAttribute, DeleteAttribute, GetAttributesofProduct };
 }
 
 export default AttributesHelper;

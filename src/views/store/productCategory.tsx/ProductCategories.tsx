@@ -35,13 +35,19 @@ const Categories: React.FC = () => {
         {
             key: "name",
             title: "Name",
-            width: '23%',
+            width: '15%',
+            isTrim: true
+        },
+        {
+            key: "subCategory",
+            title: "Sub Category",
+            width: '15%',
             isTrim: true
         },
         {
             key: "productCount",
             title: "Products",
-            width: '13%'
+            width: '8%'
         },
         {
             key: "productActive",
@@ -51,7 +57,7 @@ const Categories: React.FC = () => {
         {
             key: "productInctive",
             title: "Inactive Products",
-            width: '17%'
+            width: '15%'
         },
         {
             key: "status",

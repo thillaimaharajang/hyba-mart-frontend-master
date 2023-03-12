@@ -43,9 +43,11 @@ const AddProductCategories: React.FC<IAddPrductCategoryProps> = (props) => {
         }
         if (productCategory?.isValidCreateProductCategoryForm()) {
             isValidForm = true;
-            props.toggleAddModal();
-            await ProductCategoryHelper(navigate).CreateProductCategory();
-            productCategory?.resetPostData();
+            let response = await ProductCategoryHelper(navigate).CreateProductCategory();
+            if (response) {
+                props.toggleAddModal();
+                productCategory?.resetPostData();
+            }
         } else {
             isValidForm = false;
         }

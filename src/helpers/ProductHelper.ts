@@ -53,9 +53,8 @@ const ProductHelper = (navigate: NavigateFunction) => {
         let resProducts: any;
         productStore.isLoading = true;
         resProducts = await HttpClient(navigate).GetResponse(Endpoints.Product +'/'+ id);
-        console.log("resProducts",resProducts)
-        // resProducts = await SecureService(navigate).GetResponse(Endpoints.ProductStore + params);
         productStore.isLoading = false;
+        productStore.resetData();
 
         if (resProducts?.status === 'OK') {
             productStore.products = resProducts?.data;
@@ -64,7 +63,6 @@ const ProductHelper = (navigate: NavigateFunction) => {
 
 
     const CreateProduct = async () => {
-       console.log("productStore",productStore)
         let resCreateProduct: any;
         let productFormData: any = new FormData();
         productFormData.append('storeId', shopStore?.id);
@@ -77,7 +75,6 @@ const ProductHelper = (navigate: NavigateFunction) => {
         productFormData.append('description', Function.convertEditorStateToHtml(productStore?.description));
         productFormData.append('mainImage', productStore?.mainImage);
         if( productStore?.galleryImage.length){
-            console.log("lenght: ",productStore?.galleryImage.length)
             productStore?.galleryImage.map((image:any)=>{
                 productFormData.append('galleryImage', image);
             })
@@ -94,8 +91,8 @@ const ProductHelper = (navigate: NavigateFunction) => {
         productFormData.append('badgeId', productStore?.badgeId);
         productFormData.append('badgeStatus', productStore?.badgeStatus);
         productFormData.append('attributes', JSON.stringify(productStore?.attributes));
-        productFormData.append('status', productStore?.status);
-        productFormData.append('outOfStockStatus', productStore?.outOfStockStatus);
+        productFormData.append('status', productStore?.productStatus);
+        productFormData.append('outOfStock', productStore?.outOfStock);
         
         productStore.isLoading = true;
         resCreateProduct = await SecureService(navigate).PostResponse(Endpoints.Product, 'POST', productFormData, true);
@@ -116,18 +113,29 @@ const ProductHelper = (navigate: NavigateFunction) => {
         productFormData.append('regularPrice', productStore?.regularPrice);
         productFormData.append('offerPrice', productStore?.offerPrice);
         productFormData.append('sku', productStore?.sku);
-        // productFormData.append('description', Function.convertEditorStateToHtml(productStore?.description));
-        productFormData.append('description', productStore?.description);
+        productFormData.append('description', Function.convertEditorStateToHtml(productStore?.description));
         productFormData.append('mainImage', productStore?.mainImage);
-        productFormData.append('galleryImage', productStore?.galleryImage);
+        if( productStore?.galleryImage.length){
+            productStore?.galleryImage.map((image:any)=>{
+                productFormData.append('galleryImage', image);
+            })
+
+        }else{
+            console.log("Nodata in Gallery Image: ",productStore?.galleryImage.length)
+        }
+        // Display the key/value pairs
+        // for (var pair of productFormData.entries()) {
+        //     console.log("fd",pair[0]+ ', ' + pair[1]); 
+        // }          
         productFormData.append('measurement', productStore?.measurement);
         productFormData.append('quantity', productStore?.quantity);
         productFormData.append('badgeId', productStore?.badgeId);
         productFormData.append('badgeStatus', productStore?.badgeStatus);
-        productFormData.append('attributes', productStore?.attributes);
-        productFormData.append('status', productStore?.status);
-        productFormData.append('outOfStockStatus', productStore?.outOfStockStatus);
+        productFormData.append('attributes', JSON.stringify(productStore?.attributes));
+        productFormData.append('status', productStore?.productStatus);
+        productFormData.append('outOfStock', productStore?.outOfStock);
 
+        productStore.products = [];
         productStore.isLoading = true;
         resUpdateProduct = await SecureService(navigate).PostResponse(Endpoints.Product, 'PUT', productFormData, true);
         productStore.isLoading = false;

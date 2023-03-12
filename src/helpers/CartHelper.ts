@@ -29,7 +29,6 @@ const CartHelper = (navigate: NavigateFunction) => {
     }
 
     const addtoCart = async (cartObj:any) => {
-       console.log("cartObj",cartObj)
         let resCreateCart: any;
         let cartFormData: any = new FormData();
         cartFormData.append('storeId', cartObj?.storeId);

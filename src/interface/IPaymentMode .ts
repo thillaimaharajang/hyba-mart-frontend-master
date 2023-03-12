@@ -5,5 +5,7 @@ export interface IPaymentModeList {
     isEnabled: boolean,
     publishKey: string,
     secretKey: string,
-    webHookUrl: string
+    webHookUrl: string,
+    paymentModeId: number,
+    isConfigurable: boolean
 }

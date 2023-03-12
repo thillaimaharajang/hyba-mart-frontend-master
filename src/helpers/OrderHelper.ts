@@ -8,7 +8,6 @@ const OrderHelper = (navigate: NavigateFunction) => {
     let { shippingStore, shopStore , orderStore} = RootStore;
 
     const GetOrder = async () => {
-        console.log(shopStore.storeDetails)
         let params = `?storeId=${shopStore.storeDetails.id}&page=${orderStore.page}&size=${orderStore.size}`;
 
         if (orderStore?.searchStr) {

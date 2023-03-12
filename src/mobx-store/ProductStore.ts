@@ -1,6 +1,7 @@
 import { action, makeObservable, observable } from "mobx";
 import Messages from "../constant/Messages";
 import { IAttribute } from "../interface/IProduct";
+import Function from "../utils/Function";
 
 export default class ProductStore {
     @observable products: any[] = [];
@@ -10,11 +11,11 @@ export default class ProductStore {
     @observable id: any = 0;
     @observable name: string = '';
     @observable productCategoryId: number = 0;
-    @observable productCategoryName: string = '';
+    @observable productCategoryName: string | undefined = '';
     @observable productSubCategoryName: string | undefined = '';
     @observable regularPrice: string = '';
     @observable offerPrice: string = '';
-    @observable sku: string = '';
+    @observable sku: number = 0;
     @observable description: any | undefined = undefined;
     @observable mainImage: any = [];
     @observable galleryImage: any = [];
@@ -22,10 +23,10 @@ export default class ProductStore {
     @observable quantity: string = '';
     @observable badgeId: any = '';
     @observable badgeStatus: boolean = false;
-    @observable attributes: IAttribute[] = [{ id: '', description: '', status: false }];
+    @observable attributes: IAttribute[] = [];
     @observable productStatus: boolean = false;
     @observable status: any = true;
-    @observable outOfStockStatus: boolean = false;
+    @observable outOfStock: boolean = false;
     @observable filterProductCategoryId: any = '';
     @observable searchStr: string = '';
     @observable filterObj: any = {};
@@ -58,13 +59,27 @@ export default class ProductStore {
 
         this.id = selectedProduct?.id;
         this.name = selectedProduct?.name;
-        this.status = selectedProduct?.status;
+        this.productStatus = selectedProduct?.status;
+        this.sku =  selectedProduct?.sku;
+        this.badgeId =  selectedProduct?.badgeId;
+        this.badgeStatus =  selectedProduct?.badgeStatus;
+        this.attributes =  selectedProduct?.attributes;
+        this.mainImage =  selectedProduct?.mainImage;
+        this.measurement =  selectedProduct?.measurement;
+        this.galleryImage =  selectedProduct?.galleryImage;
+        this.offerPrice =  selectedProduct?.offerPrice;
+        this.outOfStock =  selectedProduct?.outOfStock;
+        this.productCategoryId =  selectedProduct?.productCategoryId;
+        this.description = Function.convertHtmlToEditorState(selectedProduct?.description);;
+
+        this.quantity =  selectedProduct?.quantity;
+        this.regularPrice =  selectedProduct?.regularPrice;
         this.formCreateProductErrors = {};
     }
 
     
     @action setProductDetails = (product: any) => {
-        this.sku =  product?.SKU;
+        this.sku =  product?.sku;
         this.badgeId =  product?.badgeId;
         this.badgeStatus =  product?.badgeStatus;
         this.description =  product?.description;
@@ -73,11 +88,12 @@ export default class ProductStore {
         this.measurement =  product?.measurement;
         this.name =  product?.name;
         this.offerPrice =  product?.offerPrice;
-        this.outOfStockStatus =  product?.outOfStock;
+        this.outOfStock =  product?.outOfStock;
         this.productCategoryId =  product?.productCategoryId;
         this.quantity =  product?.quantity;
         this.regularPrice =  product?.regularPrice;
         this.status =  product?.status;
+        this.productStatus =  product?.status;
         this.formCreateProductErrors = {};
     }
 
@@ -111,7 +127,6 @@ export default class ProductStore {
         if (!this.description?.getCurrentContent()?.hasText()) {
             this.formCreateProductErrors.description = Messages.EmptyProductDescription;
         } else if (this.description?.getCurrentContent()?.getPlainText()?.length > 80) {
-            console.log(this.description?.getCurrentContent()?.getPlainText()?.length)
             this.formCreateProductErrors.description = Messages.InvalidDescription;
         }
 

@@ -11,5 +11,6 @@ export interface IProductList {
 export interface IAttribute {
     id: string | number
     description?: string
+    attributeId: number
     status: boolean
 }

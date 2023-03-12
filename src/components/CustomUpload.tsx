@@ -29,6 +29,8 @@ const CustomUpload: React.FC<ICustomUploadProps> = (props) => {
                 if (typeof val === 'object') {
                     if (val?.size) {
                         images.push(convertFileObjectToUrl(val));
+                    }else{
+                        images.push(Function.loadImagePath(val?.productImage));
                     }
                 } else {
                     images.push(Function.loadImagePath(val));

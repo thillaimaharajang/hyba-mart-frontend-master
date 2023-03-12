@@ -40,9 +40,12 @@ const UpdateProductCategories: React.FC<IUpdatePrductCategoryProps> = (props) =>
         event.preventDefault()
         if (productCategory?.isValidCreateProductCategoryForm()) {
             isValidForm = true;
-            props.toggleUpdateModal();
-            await ProductCategoryHelper(navigate).UpdateProductCategory();
-            productCategory?.resetPostData();
+            let response = await ProductCategoryHelper(navigate).UpdateProductCategory();
+            if (response) {
+                props.toggleUpdateModal();
+                productCategory?.resetPostData();
+            }
+            
         } else {
             isValidForm = false;
         }

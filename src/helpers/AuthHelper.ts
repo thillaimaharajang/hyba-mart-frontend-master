@@ -30,7 +30,6 @@ const AuthHelper = () => {
 
             authStore.setProfileInfo(resLogin?.data);
             message.success(resLogin?.message, 5);
-            console.log("shopStore",shopStore)
             if (authStore.roleId === 3){
                 navigate('/product-store/'+shopStore?.storeDetails?.uniqueName, { replace: true });
             }else{

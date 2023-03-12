@@ -23,7 +23,7 @@ interface IAddPrductCategoryProps {
     toggleAddModal: any
 }
 
-const AddProductCategories: React.FC<IAddPrductCategoryProps> = (props) => {
+const AddProduct: React.FC<IAddPrductCategoryProps> = (props) => {
 
     const { productStore, productCategory, shopStore, badgeStore, attributesStore } = RootStore;
     let navigate = useNavigate();
@@ -92,7 +92,6 @@ const AddProductCategories: React.FC<IAddPrductCategoryProps> = (props) => {
             productStore.mainImage = event?.target?.files[0];
         } else if (name === 'galleryImage') {
             productStore.galleryImage.push(event?.target?.files[0]);
-            console.log("productStore.galleryImage",productStore.galleryImage)
         }
 
         if (!isValidForm) {
@@ -109,7 +108,7 @@ const AddProductCategories: React.FC<IAddPrductCategoryProps> = (props) => {
     }
 
     const onAddAttribute = () => {
-        const attributeObj: IAttribute = { id: '', description: '', status: false };
+        const attributeObj: IAttribute = { id: '', description: '', status: false, attributeId : 0};
         productStore.attributes.push(attributeObj);
     }
 
@@ -124,8 +123,8 @@ const AddProductCategories: React.FC<IAddPrductCategoryProps> = (props) => {
             productStore.attributes[index].status = checked;
         } else if (name === 'productStatus') {
             productStore.productStatus = checked;
-        } else if (name === 'outOfStockStatus') {
-            productStore.outOfStockStatus = checked;
+        } else if (name === 'outOfStock') {
+            productStore.outOfStock = checked;
         }
     }
 
@@ -331,8 +330,8 @@ const AddProductCategories: React.FC<IAddPrductCategoryProps> = (props) => {
             </div>
             <div className="row">
                 <div className="col-5">
-                    <FormGroup isRequired label='Out Of Stock' labelSpacing='mb-1' error={productStore?.formCreateProductErrors?.outOfStockStatus}
-                        labelComponent={<StatusComponent status={productStore.outOfStockStatus} onToggle={(checked: boolean) => toggleStatus(checked, 'outOfStockStatus')} />}>
+                    <FormGroup isRequired label='Out Of Stock' labelSpacing='mb-1' error={productStore?.formCreateProductErrors?.outOfStock}
+                        labelComponent={<StatusComponent status={productStore.outOfStock} onToggle={(checked: boolean) => toggleStatus(checked, 'outOfStock')} />}>
                         <div style={{ fontSize: '9px', color: '#635D5D' }}>Turning this on will show the products as `out of stock` even if the stock is available</div>
                     </FormGroup>
                 </div>
@@ -347,4 +346,4 @@ const AddProductCategories: React.FC<IAddPrductCategoryProps> = (props) => {
     </PageTransition >
 }
 
-export default observer(AddProductCategories);
+export default observer(AddProduct);

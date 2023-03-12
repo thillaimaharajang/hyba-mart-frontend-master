@@ -61,6 +61,9 @@ const ProductCategoryHelper = (navigate: NavigateFunction) => {
         if (resCreateProductCategory?.status === 'CREATED') {
             message.success(resCreateProductCategory?.message, 5);
             await GetProductCategories();
+            return true;
+        }else {
+            return false;
         }
     }
 
@@ -81,6 +84,9 @@ const ProductCategoryHelper = (navigate: NavigateFunction) => {
         if (resUpdateProductCategory?.status === 'OK') {
             message.success(resUpdateProductCategory?.message, 5);
             await GetProductCategories();
+            return true;
+        }else{
+            return false;
         }
     }
 
